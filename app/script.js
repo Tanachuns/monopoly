@@ -24,7 +24,6 @@ class Player {
   }
 
   moveByDice(dice) {
-    console.log("roll ", dice);
     try {
       tiles[this.position + dice].appendChild(this.tokenElement);
       tiles[this.position].firstElement = "";
@@ -32,22 +31,26 @@ class Player {
     } catch (error) {
       tiles[this.position + dice - 36].appendChild(this.tokenElement);
       tiles[this.position].firstElement = "";
-      this.position += dice - 36;
+      this.position = this.position + dice - 36;
     }
-
-    console.log("move to", this.tokenElement.parentNode.id);
-    console.log("move to", this.position);
+    console.log(this.name, "rolls ", dice, "then move to", this.position);
   }
 }
 
 //create test token
 const players = [];
-for (let i = 0; i < 2; i++) {
-  players.push(new Player("player" + i, "red"));
-}
+players.push(new Player("Player 1", "red"));
+players.push(new Player("Player 2", "purple"));
+console.log(players);
+// for (let i = 0; i < 2; i++) {
+//   players.push(new Player("player" + i, "red"));
+// }
 
 const button = document.querySelector("#roll");
+let turn = 0;
 button.onclick = () => {
   const dice = Math.floor(Math.random() * 6) + 1;
-  player1.moveByDice(dice);
+  console.log(turn);
+  players[turn].moveByDice(dice);
+  turn < players.length - 1 ? (turn += 1) : (turn = 0);
 };
