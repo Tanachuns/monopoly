@@ -1,12 +1,12 @@
+# monopoly
 
-   # monopoly
-
-Project Schedule : [click here](shorturl.at/iAN24)
+Project Schedule : [click here](https://shorturl.at/iAN24)
 
 Readme.md Requirement
- - [ ] An embedded screenshot of the app
- - [ ] List of the **Technologies used**
- - [ ] **Installation instructions**
- - [ ] Your **User stories** – who are your users, what do they want and why?
- - [ ] Your **Wireframes** – sketches of major views / interfaces in your application
- - [ ] Descriptions of any  **Unsolved problems**  or  **major hurdles**  you had to overcome
+
+- [ ] An embedded screenshot of the app
+- [ ] List of the **Technologies used**
+- [ ] **Installation instructions**
+- [ ] Your **User stories** – who are your users, what do they want and why?
+- [ ] Your **Wireframes** – sketches of major views / interfaces in your application
+- [ ] Descriptions of any **Unsolved problems** or **major hurdles** you had to overcome
