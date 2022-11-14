@@ -6,26 +6,48 @@ for (let i = 0; i < 36; i++) {
 }
 console.log("tiles array: ", tiles);
 
-//create test token
-const token = document.createElement("div");
-token.className = "player-token";
-tiles[0].appendChild(token);
-console.log(token);
+//Player
 
-function move_test(token, dice) {
-  try {
-    tiles[parseInt(token.parentNode.id) + dice].appendChild(token);
-    tiles[token.parentNode.id].firstElement = "";
-  } catch (error) {
-    tiles[parseInt(token.parentNode.id) + dice - 36].appendChild(token);
-    tiles[token.parentNode.id].firstElement = "";
+class Player {
+  constructor(name, color) {
+    this.name = name;
+    this.color = color;
+    this.money = 1500;
+    this.position = 0;
+    this.property = [];
+
+    this.tokenElement = document.createElement("div");
+    this.tokenElement.className = "player-token";
+    this.tokenElement.style.background = color;
+    tiles[this.position].appendChild(this.tokenElement);
+    console.log(this.tokenElement);
   }
-  console.log("move to", token.parentNode.id);
+
+  moveByDice(dice) {
+    console.log("roll ", dice);
+    try {
+      tiles[this.position + dice].appendChild(this.tokenElement);
+      tiles[this.position].firstElement = "";
+      this.position += dice;
+    } catch (error) {
+      tiles[this.position + dice - 36].appendChild(this.tokenElement);
+      tiles[this.position].firstElement = "";
+      this.position += dice - 36;
+    }
+
+    console.log("move to", this.tokenElement.parentNode.id);
+    console.log("move to", this.position);
+  }
+}
+
+//create test token
+const players = [];
+for (let i = 0; i < 2; i++) {
+  players.push(new Player("player" + i, "red"));
 }
 
 const button = document.querySelector("#roll");
 button.onclick = () => {
   const dice = Math.floor(Math.random() * 6) + 1;
-  console.log("roll ", dice);
-  move_test(token, dice);
+  player1.moveByDice(dice);
 };
