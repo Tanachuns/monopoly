@@ -14,7 +14,7 @@ class Player {
     this.color = color;
     this.money = 1500;
     this.position = 0;
-    this.property = [];
+    this.asset = [];
 
     this.tokenElement = document.createElement("div");
     this.tokenElement.className = "player-token";
