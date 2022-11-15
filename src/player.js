@@ -15,8 +15,9 @@ class Player {
     //create token
     this.tokenElement = document.createElement("div");
     this.tokenElement.className = "player-token";
-    this.tokenElement.style.background = color;
-    tiles[this.position].appendChild(this.tokenElement);
+    this.tokenElement.style.backgroundImage = `url("../src/images/token.png")`;
+    this.tokenElement.style.borderColor = color;
+    tiles[this.position].element.appendChild(this.tokenElement);
     // console.log(this.tokenElement);
 
     //create details
@@ -40,10 +41,8 @@ class Player {
   update() {
     let assetsHtml = "";
     this.assets.forEach((item) => {
-      console.log(tilesData[item].name);
-      assetsHtml += `<li>[${tilesData[item].id}] ${tilesData[item].name}</li>`;
+      assetsHtml += `<li>[${tiles[item].id}] ${tiles[item].name}</li>`;
     });
-    console.log(this.asset, assetsHtml);
     this.detailsElement.innerHTML = `
         <h2>${this.name}</h2>
         <p>Money : ${this.money}</p>
@@ -51,19 +50,19 @@ class Player {
         <div class="asset">
             <p>Assets: </p>
             <ul>
-                ${assetsHtml}
-               
+                ${assetsHtml}    
             </ul>
         </div>`;
+    console.log("player's details updated.");
   }
   moveByDice(dice) {
     // if (this.position + dice > 35) {
-    if (this.position + dice > 35) {
-      tiles[this.position + dice - 36].appendChild(this.tokenElement);
+    if (this.position + dice > 4) {
+      tiles[this.position + dice - 5].element.appendChild(this.tokenElement);
       // this.position = this.position + dice - 36;
-      this.position = this.position + dice - 36;
+      this.position = this.position + dice - 5;
     } else {
-      tiles[this.position + dice].appendChild(this.tokenElement);
+      tiles[this.position + dice].element.appendChild(this.tokenElement);
       this.position += dice;
     }
     console.log(this.name, "rolls ", dice, "then move to", this.position);
@@ -73,7 +72,12 @@ class Player {
     this.isPlaying = !this.isPlaying;
   }
   setMoney(amount) {
-    this.money += amount;
+    if (this.money + amount < 0) {
+      return false;
+    } else {
+      this.money += amount;
+      return true;
+    }
   }
 
   addAsset(asset) {
@@ -85,26 +89,40 @@ class Player {
     this.assets = this.assets.filter((item) => item.id !== asset.id);
   }
 
-  removePlayer() {
+  removePlayer(reason) {
+    popup.parentElement.style.display = "flex";
+    popup.innerHTML = `<h1>${this.name} is Over.</h1>
+            <p>reason: ${reason}</p>
+              <button id='cancel-btn'>close</button>`;
+    const cancelBtn = document.querySelector("#cancel-btn");
+    cancelBtn.onclick = () => {
+      popup.parentElement.style.display = "none";
+    };
     players = players.filter((player) => player !== this);
     this.position = 0;
     this.tokenElement.remove();
     this.detailsElement.remove();
+    tilesData.forEach((tile) => {
+      if (tile.owner === this.id) {
+        tile.owner = "";
+        tile.setColor("gray");
+      }
+    });
     console.log(this.name, " is out!");
   }
   // positionCheck() {
-  //   const currentTile = tilesData[this.position];
-  //   console.log(currentTile);
-  //   if (currentTile.type === "normal") {
-  //     console.log(currentTile.owner);
-  //     if (currentTile.owner === "") {
+  //   const tile = tilesData[this.position];
+  //   console.log(tile);
+  //   if (tile.type === "normal") {
+  //     console.log(tile.owner);
+  //     if (tile.owner === "") {
   //       console.log("no owner");
   //       popup.parentElement.style.display = "flex";
-  //       popup.innerHTML = `<h1>[${currentTile.id}] ${currentTile.name} </h1>
-  //       <p>type: ${currentTile.type}</p>
-  //       <img src="${currentTile.img}" alt="${currentTile.name}" width="300">
-  //       <p>rent : ${currentTile.rent[currentTile.lv]} G</p>
-  //       <button id='buy-btn'>buy for ${currentTile.price} G</button>
+  //       popup.innerHTML = `<h1>[${tile.id}] ${tile.name} </h1>
+  //       <p>type: ${tile.type}</p>
+  //       <img src="${tile.img}" alt="${tile.name}" width="300">
+  //       <p>rent : ${tile.rent[tile.lv]} G</p>
+  //       <button id='buy-btn'>buy for ${tile.price} G</button>
   //       <button id='cancel-btn'>close</button>`;
   //       const cancelBtn = document.querySelector("#cancel-btn");
   //       cancelBtn.onclick = () => {
@@ -112,22 +130,22 @@ class Player {
   //       };
   //       const buyBtn = document.querySelector("#buy-btn");
   //       buyBtn.onclick = () => {
-  //         this.setMoney(-currentTile.price);
-  //         this.asset.push(currentTile.id);
-  //         currentTile.owner = players.indexOf(this);
-  //         tiles[currentTile.id].style.background = this.color;
-  //         console.log(this.asset, currentTile.owner);
+  //         this.setMoney(-tile.price);
+  //         this.asset.push(tile.id);
+  //         tile.owner = players.indexOf(this);
+  //         tiles[tile.id].style.background = this.color;
+  //         console.log(this.asset, tile.owner);
   //         popup.parentElement.style.display = "none";
   //         this.update();
   //       };
-  //     } else if (currentTile.owner == players.indexOf(this)) {
+  //     } else if (tile.owner == players.indexOf(this)) {
   //       console.log("time to upgrade");
   //       popup.parentElement.style.display = "flex";
-  //       popup.innerHTML = `<h1>[${currentTile.id}] ${currentTile.name} </h1>
-  //       <p>type: ${currentTile.type}</p>
-  //       <img src="${currentTile.img}" alt="${currentTile.name}" width="300">
-  //       <p>rent : ${currentTile.rent[currentTile.lv]} G</p>
-  //       <button id='upgrade-btn'>upgrade for ${currentTile.upgrade} G</button>
+  //       popup.innerHTML = `<h1>[${tile.id}] ${tile.name} </h1>
+  //       <p>type: ${tile.type}</p>
+  //       <img src="${tile.img}" alt="${tile.name}" width="300">
+  //       <p>rent : ${tile.rent[tile.lv]} G</p>
+  //       <button id='upgrade-btn'>upgrade for ${tile.upgrade} G</button>
   //       <button id='cancel-btn'>close</button>`;
   //       const cancelBtn = document.querySelector("#cancel-btn");
   //       cancelBtn.onclick = () => {
@@ -135,20 +153,20 @@ class Player {
   //       };
   //       const upgradeBtn = document.querySelector("#upgrade-btn");
   //       upgradeBtn.onclick = () => {
-  //         this.setMoney(-currentTile.upgrade);
-  //         currentTile.lv += 1;
+  //         this.setMoney(-tile.upgrade);
+  //         tile.lv += 1;
   //         popup.parentElement.style.display = "none";
   //         this.update();
   //       };
   //     } else {
   //       popup.parentElement.style.display = "flex";
-  //       popup.innerHTML = `<h1>[${currentTile.id}] ${currentTile.name} </h1>
-  //       <p>type: ${currentTile.type}</p>
-  //       <p>Owner: ${players[currentTile.owner].name}</p>
-  //       <img src="${currentTile.img}" alt="${currentTile.name}" width="300">
-  //       <p>rent : ${currentTile.rent[currentTile.lv]} G</p>
+  //       popup.innerHTML = `<h1>[${tile.id}] ${tile.name} </h1>
+  //       <p>type: ${tile.type}</p>
+  //       <p>Owner: ${players[tile.owner].name}</p>
+  //       <img src="${tile.img}" alt="${tile.name}" width="300">
+  //       <p>rent : ${tile.rent[tile.lv]} G</p>
   //       <button id='rent-btn'>rent for ${
-  //         currentTile.rent[currentTile.lv]
+  //         tile.rent[tile.lv]
   //       } G</button>
   //       <button id='cancel-btn'>close</button>`;
   //       const cancelBtn = document.querySelector("#cancel-btn");
@@ -158,19 +176,19 @@ class Player {
   //       const rentBtn = document.querySelector("#rent-btn");
   //       rentBtn.onclick = () => {
   //         console.log("rent");
-  //         this.setMoney(currentTile.rent[currentTile.lv] * -1);
-  //         players[currentTile.owner].setMoney(currentTile.rent[currentTile.lv]);
+  //         this.setMoney(tile.rent[tile.lv] * -1);
+  //         players[tile.owner].setMoney(tile.rent[tile.lv]);
   //         console.log(
   //           "pay rent " +
-  //             currentTile.rent[currentTile.lv] +
+  //             tile.rent[tile.lv] +
   //             " to " +
-  //             players[currentTile.owner].name
+  //             players[tile.owner].name
   //         );
   //         popup.parentElement.style.display = "none";
   //         this.update();
   //       };
   //     }
-  //   } else if (currentTile.type === "spacial") {
+  //   } else if (tile.type === "spacial") {
   //     console.log("Temple!");
   //   }
   // }
