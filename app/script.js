@@ -9,7 +9,7 @@ tiles.forEach((tile) => {
       tileLevel[tile.lv]
     }) </h1>
             <p>type: ${tile.type}</p>
-            <img src="${tile.img}" alt="${tile.name}" width="300">
+            <img src="${tile.img}" alt="${tile.name}" height="200">
             <p>Price : ${tile.price} G</p>
             <p>Rent : ${tile.rent[tile.lv]} G</p>
 
@@ -38,7 +38,6 @@ const diceElement = document.querySelector("#dice-1");
 let turn = 0;
 const diceFaces = ["zero", "one", "two", "three", "four", "five", "six"];
 const tileLevel = ["Camp", "House", "City", "Barrack"];
-playerTurn.innerHTML = players[turn].name + "'s turn";
 
 function checkTile(currentPlayer, tile) {
   try {
@@ -139,8 +138,7 @@ function checkTile(currentPlayer, tile) {
         };
       }
     } else if (tile.type === "spacial") {
-    } else if (tile.type === "spacial") {
-    } else if (tile.type === "tresure") {
+    } else if (tile.type === "treasure") {
     } else if (tile.type === "stop") {
     } else if (tile.type === "teleport") {
     } else if (tile.type === "tostop") {
@@ -160,9 +158,10 @@ function allUpdate() {
 }
 
 function rolls() {
-  // const dice = Math.floor(Math.random() * 6) + 1;
+  turn === players.length ? (turn = 0) : (turn = turn);
+  const dice = Math.floor(Math.random() * 6) + 1;
   if (players.length > 1) {
-    const dice = 1; //for test
+    // const dice = 1; //for test
     diceElement.style.backgroundImage = `url("../src/images/dice/dice-six-faces-${diceFaces[dice]}.png")`;
     let currentPlayer = players[turn];
 
@@ -173,8 +172,8 @@ function rolls() {
       currentPlayer.moveByDice(dice);
       checkTile(currentPlayer, tiles[currentPlayer.position]);
     }
-    turn === players.length - 1 ? (turn = 0) : (turn += 1);
-    playerTurn.innerHTML = currentPlayer.name + "'s Turn.";
+    turn < players.length - 1 ? (turn += 1) : (turn = 0);
+    playerTurn.innerHTML = players[turn].name + "'s Turn.";
   } else {
     popup.parentElement.style.display = "flex";
     popup.innerHTML = `<h1>${players[0].name} is Winner.</h1>
@@ -185,7 +184,7 @@ function rolls() {
     };
   }
 }
-
+playerTurn.innerHTML = players[turn].name + "'s turn";
 button.onclick = () => rolls();
 test.onclick = () => {
   players[1].removePlayer("test button");

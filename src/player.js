@@ -56,11 +56,11 @@ class Player {
     console.log("player's details updated.");
   }
   moveByDice(dice) {
-    // if (this.position + dice > 35) {
-    if (this.position + dice > 4) {
-      tiles[this.position + dice - 5].element.appendChild(this.tokenElement);
-      // this.position = this.position + dice - 36;
-      this.position = this.position + dice - 5;
+    if (this.position + dice > 35) {
+      // if (this.position + dice > 4) {
+      tiles[this.position + dice - 36].element.appendChild(this.tokenElement);
+      this.position = this.position + dice - 36;
+      // this.position = this.position + dice - 5;
     } else {
       tiles[this.position + dice].element.appendChild(this.tokenElement);
       this.position += dice;
@@ -102,8 +102,8 @@ class Player {
     this.position = 0;
     this.tokenElement.remove();
     this.detailsElement.remove();
-    tilesData.forEach((tile) => {
-      if (tile.owner === this.id) {
+    tiles.forEach((tile) => {
+      if (tile.owner == this.id) {
         tile.owner = "";
         tile.setColor("gray");
       }
