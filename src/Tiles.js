@@ -1,0 +1,26 @@
+const tilesData = [
+  {
+    id: 0,
+    name: "Start.",
+    type: "start",
+    img: "",
+    owner: "",
+    lv: 0,
+    price: 0,
+    resale: 0,
+    rent: [0, 0, 0, 0],
+    upgrade: 0,
+  },
+  {
+    id: 1,
+    name: "Mushroom Road.",
+    type: "normal",
+    img: "",
+    owner: players[0],
+    lv: 0,
+    price: 60,
+    resale: 120,
+    rent: [2, 10, 90, 250],
+    upgrade: 50,
+  },
+];
