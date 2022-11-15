@@ -89,6 +89,7 @@ class Player {
     players = players.filter((player) => player !== this);
     this.position = 0;
     this.tokenElement.remove();
+    this.detailsElement.remove();
     console.log(this.name, " is out!");
   }
   // positionCheck() {

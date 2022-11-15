@@ -25,8 +25,10 @@ let turn = 0;
 const diceFaces = ["zero", "one", "two", "three", "four", "five", "six"];
 playerTurn.innerHTML = players[turn].name + "'s turn";
 
-button.onclick = () => {
+function rolls() {
   const dice = Math.floor(Math.random() * 6) + 1;
+  diceElement.style.backgroundImage = `url("../src/images/dice/dice-six-faces-${diceFaces[dice]}.png")`;
+
   if (!players[turn].isPlaying) {
     console.log("player isnt in the game");
   } else {
@@ -34,8 +36,11 @@ button.onclick = () => {
     players[turn].moveByDice(dice);
   }
   turn == players.length - 1 ? (turn = 0) : (turn += 1);
+  playerTurn.innerHTML = players[turn].name + "'s Turn.";
   // const dice = Math.floor(Math.random() * 6) + 1;
-};
+}
+
+button.onclick = () => rolls();
 test.onclick = () => {
   players[1].removePlayer();
 };
