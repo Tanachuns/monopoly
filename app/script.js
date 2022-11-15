@@ -24,7 +24,7 @@ const diceElement = document.querySelector("#dice-1");
 let turn = 0;
 const diceFaces = ["zero", "one", "two", "three", "four", "five", "six"];
 playerTurn.innerHTML = players[turn].name + "'s turn";
-players[1].removePlayer();
+
 button.onclick = () => {
   const dice = Math.floor(Math.random() * 6) + 1;
   if (!players[turn].isPlaying) {
@@ -35,4 +35,7 @@ button.onclick = () => {
   }
   turn == players.length - 1 ? (turn = 0) : (turn += 1);
   // const dice = Math.floor(Math.random() * 6) + 1;
+};
+test.onclick = () => {
+  players[1].removePlayer();
 };

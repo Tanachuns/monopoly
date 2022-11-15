@@ -87,6 +87,9 @@ class Player {
 
   removePlayer() {
     players = players.filter((player) => player !== this);
+    this.position = 0;
+    this.tokenElement.remove();
+    console.log(this.name, " is out!");
   }
   // positionCheck() {
   //   const currentTile = tilesData[this.position];
