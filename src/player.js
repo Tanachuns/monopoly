@@ -21,6 +21,7 @@ class Player {
     this.detailsElement = document.createElement("div");
     this.detailsElement.className = "player-details";
     this.detailsElement.style.borderColor = this.color;
+    let assetsHtml = "";
     this.detailsElement.innerHTML = `
         <h2>${this.name}</h2>
         <p>Money : ${this.money}</p>
@@ -28,13 +29,19 @@ class Player {
         <div class="asset">
             <p>Assets: </p>
             <ul>
-                <li>[1] land 1 </li>
+                ${assetsHtml}
             </ul>
         </div>`;
     playerContrainer.appendChild(this.detailsElement);
     console.log(this.detailsElement);
   }
   update() {
+    let assetsHtml = "";
+    this.asset.forEach((item) => {
+      console.log(tiles[item].name);
+      assetsHtml += `<li>[${tilesData[item].id}] ${tilesData[item].name}</li>`;
+    });
+    console.log(this.asset, assetsHtml);
     this.detailsElement.innerHTML = `
         <h2>${this.name}</h2>
         <p>Money : ${this.money}</p>
@@ -42,7 +49,8 @@ class Player {
         <div class="asset">
             <p>Assets: </p>
             <ul>
-                <li>[1] land 1 </li>
+                ${assetsHtml}
+               
             </ul>
         </div>`;
   }
@@ -63,11 +71,20 @@ class Player {
         <p>type: ${currentTile.type}</p>
         <img src="${currentTile.img}" alt="${currentTile.name}" width="300">
         <p>rent : ${currentTile.rent[currentTile.lv]} G</p>
-        <button>buy for ${currentTile.price} G</button>
-        <button id='cancel-btn'>cancel</button>`;
+        <button id='buy-btn'>buy for ${currentTile.price} G</button>
+        <button id='cancel-btn'>close</button>`;
         const cancelBtn = document.querySelector("#cancel-btn");
         cancelBtn.onclick = () => {
           popup.parentElement.style.display = "none";
+        };
+        const buyBtn = document.querySelector("#buy-btn");
+        buyBtn.onclick = () => {
+          this.setMoney(-currentTile.price);
+          this.asset.push(currentTile.id);
+          currentTile.owner = players.indexOf(this);
+          console.log(this.asset, currentTile.owner);
+          popup.parentElement.style.display = "none";
+          this.update();
         };
       } else if (currentTile.owner == players.indexOf(this)) {
         console.log("time to upgrade");
