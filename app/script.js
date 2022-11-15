@@ -2,9 +2,9 @@
 const tiles = [];
 for (let i = 0; i < 36; i++) {
   const tile = document.querySelector(`[id="${i}"]`);
-  tile.onmouseover = () => {
-    console.log(tilesData[i]);
-  };
+  // tile.onmouseover = () => {
+  //   console.log(tilesData[i]);
+  // };
   tiles.push(tile);
 }
 console.log("tiles array: ", tiles);
@@ -26,7 +26,6 @@ let turn = 0;
 const diceFaces = ["zero", "one", "two", "three", "four", "five", "six"];
 playerTurn.innerHTML = players[turn].name + "'s turn";
 button.onclick = () => {
-  players[turn].setMoney(200);
   // const dice = Math.floor(Math.random() * 6) + 1;
   const dice = 1;
   diceElement.style.backgroundImage = `url("../src/images/dice/dice-six-faces-${diceFaces[dice]}.png")`;
@@ -35,3 +34,4 @@ button.onclick = () => {
   turn < players.length - 1 ? (turn += 1) : (turn = 0);
   playerTurn.innerHTML = players[turn].name + "'s turn";
 };
+console.log(tilesData);

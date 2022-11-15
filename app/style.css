@@ -129,3 +129,22 @@ body{
     display: block;
     overflow: scroll;
 }
+.popup-contrainer{
+    background-color: rgba(0, 0, 0,.5);
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.popup{
+    text-align: center;
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    z-index: 10;
+    margin: auto;
+
+}
