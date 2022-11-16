@@ -28,8 +28,12 @@ tiles.forEach((tile) => {
 let players = [];
 players.push(new Player(0, "Player 1", "red"));
 players.push(new Player(1, "Player 2", "blue"));
-players.push(new Player(2, "Player 3", "green"));
+// players.push(new Player(2, "Player 3", "green"));
 // console.log(players);
+
+players[0].addAsset(16);
+players[0].addAsset(20);
+players[0].addAsset(28);
 
 //roll a dice
 const buttonRoll = document.querySelector("#roll");
@@ -221,6 +225,17 @@ function allUpdate() {
   });
 }
 
+function endGame() {
+  popup.parentElement.style.display = "flex";
+  popup.innerHTML = `<h1>${players[0].name} is Winner.</h1>
+              <button id='cancel-btn'>close</button>`;
+  const cancelBtn = document.querySelector("#cancel-btn");
+  cancelBtn.onclick = () => {
+    popup.parentElement.style.display = "none";
+    buttonRoll.style.display = "none";
+    buttonEnd.style.display = "none";
+  };
+}
 function rolls() {
   turn === players.length ? (turn = 0) : (turn = turn);
   // const dice = Math.floor(Math.random() * 6) + 1;
@@ -244,13 +259,7 @@ function rolls() {
       );
     }
   } else {
-    popup.parentElement.style.display = "flex";
-    popup.innerHTML = `<h1>${players[0].name} is Winner.</h1>
-              <button id='cancel-btn'>close</button>`;
-    const cancelBtn = document.querySelector("#cancel-btn");
-    cancelBtn.onclick = () => {
-      popup.parentElement.style.display = "none";
-    };
+    endGame();
   }
 }
 
