@@ -60,7 +60,7 @@ class Player {
                 ${assetsHtml}    
             </ul>
         </div>`;
-    console.log("player's details updated.");
+    console.log("Board updated.");
   }
   moveByDice(dice) {
     if (this.position + dice > 35) {
@@ -112,7 +112,7 @@ class Player {
   removePlayer(reason) {
     popup.parentElement.style.display = "flex";
     popup.innerHTML = `<h1>${this.name} is Over.</h1>
-            <p>reason: ${reason}</p>
+            <p> ${reason}</p>
               <button id='cancel-btn'>close</button>`;
     const cancelBtn = document.querySelector("#cancel-btn");
     cancelBtn.onclick = () => {
@@ -123,8 +123,9 @@ class Player {
     this.tokenElement.remove();
     this.detailsElement.remove();
     tiles.forEach((tile) => {
-      if (tile.owner == this.id) {
+      if (tile.owner === this.id) {
         tile.owner = "";
+        tile.lv = 0;
         tile.setColor("lightgray");
       }
     });

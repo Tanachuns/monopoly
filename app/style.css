@@ -131,6 +131,8 @@ body{
 
 .player-contrainer{
     height: 100vh;
+    width: 350px;
+    overflow: scroll;
 }
 
 .player-details{
@@ -154,10 +156,10 @@ body{
 .popup{
     text-align: center;
     width: 500px;
-    height: 500px;
     background-color: white;
     z-index: 10;
-    margin: 10%;
+    margin: auto;
+    padding: 2em;
 }
 
 #end {

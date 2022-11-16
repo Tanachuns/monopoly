@@ -26,6 +26,9 @@ let players = [];
 players.push(new Player(0, "Player 1", "red"));
 players.push(new Player(1, "Player 2", "blue"));
 players.push(new Player(2, "Player 3", "green"));
+players.push(new Player(3, "Player 4", "pink"));
+players.push(new Player(4, "Player 5", "violet"));
+
 // console.log(players);
 
 //spacial wincon test
@@ -42,7 +45,7 @@ const dice2Element = document.querySelector("#dice-2");
 
 let turn = 0;
 const diceFaces = ["zero", "one", "two", "three", "four", "five", "six"];
-const tileLevel = ["Camp", "House", "City", "Barrack"];
+const tileLevel = ["Land", "House", "City", "Barrack"];
 
 function checkTile(currentPlayer, tile) {
   try {
@@ -287,7 +290,6 @@ function checkTile(currentPlayer, tile) {
       };
       const teleBtn = document.querySelector("#tele-btn");
       const destination = document.querySelector("#tele-tiles");
-      console.log(tiles);
       tiles.forEach((tile) => {
         const newTile = document.createElement("option");
         newTile.value = tile.id;
@@ -363,7 +365,7 @@ function allUpdate() {
 function endGame(reason = "Last man standing.") {
   popup.parentElement.style.display = "flex";
   popup.innerHTML = `<h1>${players[0].name} is Winner.</h1>
-              <p>reason: ${reason}</p>
+              <p> ${reason}</p>
               <button id='cancel-btn'>close</button>`;
   const cancelBtn = document.querySelector("#cancel-btn");
   cancelBtn.onclick = () => {
@@ -379,21 +381,24 @@ function rolls() {
   const dice2 = Math.floor(Math.random() * 6) + 1;
   let currentPlayer = players[turn];
   if (players.length > 1) {
-    // const dice = dice1 + dice2;
-    const dice = 18; //for test
+    const dice = dice1 + dice2;
+    // const dice = 18; //for test
     dice1Element.style.backgroundImage = `url("../src/images/dice/dice-six-faces-${diceFaces[dice1]}.png")`;
     dice2Element.style.backgroundImage = `url("../src/images/dice/dice-six-faces-${diceFaces[dice2]}.png")`;
 
     if (currentPlayer.skipTurn > 0) {
       currentPlayer.skip(-1);
 
-      console.log("player has " + currentPlayer.skipTurn + " skip turn.");
+      console.log(
+        currentPlayer.name,
+        " has to wait for" + currentPlayer.skipTurn + " turns."
+      );
       buttonRoll.style.display = "none";
       setTimeout(() => {
         buttonEnd.style.display = "block";
       }, 1200);
     } else {
-      console.log("player in game");
+      console.log(currentPlayer.name + " in game");
       currentPlayer.moveByDice(dice);
       buttonRoll.style.display = "none";
       setTimeout(() => {

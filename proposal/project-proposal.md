@@ -41,11 +41,9 @@
 
 ## Wire Frames
 
-> Copy and paste or drag and drop your images here.
+> You can find Wire Frames at ./prop_images
 
 ## User Stories
-
-> Add user stories following the _As a [type of user], I want [what the user wants], so that [what it helps accomplish]_ format.
 
 - As a **Player** , I want to move my token, so that I click on rolls
   button.
@@ -62,27 +60,27 @@
 
 **Button - onClick**
 
-- [ ] get values from(1 or 2) dice(s)
-- [ ] move _#Token_ to the target _#Tile_
-- [ ] check tile's type and do the condition
+- [x] get values from(1 or 2) dice(s)
+- [x] move _#Token_ to the target _#Tile_
+- [x] check tile's type and do the condition
 - if Start tile => set player's money+= 200
-- if normal tile => owned? modal: pay the rent (then buy or not): buy or not
+- if normal tile => owned? modal: pay the rent (then buy or not): buy or not //still cant buy land from other
 - if spacial tile => owned? modal: pay the rent (cant buy from others): buy or not
 - if card tile => modal: draw a card => you got [lucky card name] => do the card function.
 - if stop tile => modal: stop 2 turn => skip player 2 turn.
-- if teleport tile => modal: choose where you want to go=>click the tile => move
+- if teleport tile => modal: choose where you want to go=>click the tile => move //click the tile changed select from dropdown.
 - if go to stop tile => modal: go to stop => move to stop tile.
 - if tax tile => modal: pay the tax? pay => -500G: go to stop tile;
 
-- [ ] next player
+- [x] next player
 
-**Tile - mouseOver**
+**Tile - mouseOver** > I changed it to onlick.
 
-- [ ] modal: show the tile's details.
+- [x] modal: show the tile's details. //
 
 **teleport-tile-click**
 
-- [ ] modal: choose where you want to go.
-- [ ] move player's token
+- [x] modal: choose where you want to go.
+- [x] move player's token
 
 ### Stretch Goals
