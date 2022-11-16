@@ -12,7 +12,6 @@ tiles.forEach((tile) => {
             <img src="${tile.img}" alt="${tile.name}" height="200">
             <p>Price : ${tile.price} G</p>
             <p>Rent : ${tile.rent[tile.lv]} G</p>
-
             <button id='cancel-btn'>close</button>`;
     const cancelBtn = document.querySelector("#cancel-btn");
     cancelBtn.onclick = () => {
@@ -67,9 +66,8 @@ function checkTile(currentPlayer, tile) {
         const buyBtn = document.querySelector("#buy-btn");
         buyBtn.onclick = () => {
           if (currentPlayer.setMoney(-tile.price)) {
-            currentPlayer.assets.push(tile.id);
-            tile.owner = players.indexOf(currentPlayer);
-            tiles[tile.id].element.style.background = currentPlayer.color;
+            currentPlayer.addAsset(tile.id);
+
             console.log(
               currentPlayer.name + "buy",
               tile.id,
@@ -209,6 +207,19 @@ function checkTile(currentPlayer, tile) {
       }
     } else if (tile.type === "treasure") {
     } else if (tile.type === "stop") {
+      console.log(currentPlayer.name + ` found Orc Village.`);
+      popup.parentElement.style.display = "flex";
+      popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
+            <p>type: ${tile.type}</p>
+            <img src="${tile.img}" alt="${tile.name}" width="300"><br>
+            <p>You got captured by Orc Army!</p>
+            <p><strong>Skip 2 turns</strong></p>
+            <button id='cancel-btn'>close</button>`;
+      const cancelBtn = document.querySelector("#cancel-btn");
+      cancelBtn.onclick = () => {
+        currentPlayer.skip(2);
+        popup.parentElement.style.display = "none";
+      };
     } else if (tile.type === "teleport") {
       console.log(currentPlayer.name + ` found Ancient Portal Gate.`);
       popup.parentElement.style.display = "flex";
@@ -253,6 +264,22 @@ function checkTile(currentPlayer, tile) {
         }
       };
     } else if (tile.type === "tostop") {
+      console.log(currentPlayer.name + ` found Orc Army`);
+      popup.parentElement.style.display = "flex";
+      popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
+            <p>type: ${tile.type}</p>
+            <img src="${tile.img}" alt="${tile.name}" width="300"><br>
+            <p>You got captured by Orc Army!</p>
+            <button id='cancel-btn'>Go to Orc Village</button>`;
+      const cancelBtn = document.querySelector("#cancel-btn");
+      cancelBtn.onclick = () => {
+        popup.parentElement.style.display = "none";
+        currentPlayer.moveTo(9);
+        setTimeout(
+          () => checkTile(currentPlayer, tiles[currentPlayer.position]),
+          1000
+        );
+      };
     } else if (tile.type === "tax") {
     }
   } catch (error) {
@@ -265,6 +292,9 @@ function checkTile(currentPlayer, tile) {
 function allUpdate() {
   players.forEach((player) => {
     player.update();
+  });
+  tiles.forEach((tile) => {
+    tile.element.style.background = tile.color;
   });
 }
 
@@ -280,16 +310,23 @@ function endGame(reason = "Last man standing.") {
     buttonEnd.style.display = "none";
   };
 }
+
 function rolls() {
   turn === players.length ? (turn = 0) : (turn = turn);
   // const dice = Math.floor(Math.random() * 6) + 1;
+  let currentPlayer = players[turn];
+  console.log(turn, currentPlayer, players);
   if (players.length > 1) {
     const dice = 18; //for test
     diceElement.style.backgroundImage = `url("../src/images/dice/dice-six-faces-${diceFaces[dice]}.png")`;
-    let currentPlayer = players[turn];
 
-    if (!currentPlayer.isPlaying) {
-      console.log("player isnt in the game");
+    if (currentPlayer.skipTurn > 0) {
+      currentPlayer.skip(-1);
+      console.log("player skip for " + currentPlayer.skipTurn + " turns");
+      buttonRoll.style.display = "none";
+      setTimeout(() => {
+        buttonEnd.style.display = "block";
+      }, 1200);
     } else {
       console.log("player in game");
       currentPlayer.moveByDice(dice);
@@ -315,6 +352,8 @@ function endTurn() {
   turn < players.length - 1 ? (turn += 1) : (turn = 0);
   playerTurn.innerHTML = players[turn].name + "'s Turn.";
 }
+
+allUpdate();
 
 playerTurn.innerHTML = players[turn].name + "'s turn";
 buttonRoll.onclick = () => rolls();

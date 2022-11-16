@@ -10,7 +10,7 @@ class Player {
     this.money = 1500;
     this.position = 0;
     this.assets = [];
-    this.isPlaying = true;
+    this.skipTurn = 0;
 
     //create token
     this.tokenElement = document.createElement("div");
@@ -67,6 +67,7 @@ class Player {
   }
   moveByDice(dice) {
     if (this.position + dice > 35) {
+      console.log(tiles[this.position + dice - 36]);
       // if (this.position + dice > 4) {
       tiles[this.position + dice - 36].element.appendChild(this.tokenElement);
       this.position = this.position + dice - 36;
@@ -83,10 +84,11 @@ class Player {
       this.setMoney(200);
     }
     tiles[tileId].element.appendChild(this.tokenElement);
-    this.position = tileId;
+    this.position = parseInt(tileId);
+    console.log(this.name, " moved to ", tileId, this.position);
   }
-  toggleSkip() {
-    this.isPlaying = !this.isPlaying;
+  skip(turns) {
+    this.skipTurn += turns;
   }
   setMoney(amount) {
     if (this.money + amount < 0) {
@@ -98,8 +100,16 @@ class Player {
   }
 
   addAsset(id) {
+    console.log(
+      "add Asset ",
+      id,
+      tiles[id],
+      tiles[id].owner,
+      players[players.indexOf(this)]
+    );
     this.assets.push(id);
-    tiles[id].owner = players[players.indexOf(this)];
+    tiles[id].setOwner(this.id);
+    tiles[id].setColor(this.color);
   }
 
   removeAsset(asset) {

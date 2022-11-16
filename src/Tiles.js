@@ -108,7 +108,7 @@ tiles.push(
   new Tile(
     9,
     "Orc Village",
-    "Stop",
+    "stop",
     "https://i.pinimg.com/originals/91/30/4a/91304ac2aadab9cf92f95b2488c8cd97.jpg"
   )
 );
