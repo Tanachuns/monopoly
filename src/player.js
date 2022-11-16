@@ -56,10 +56,10 @@ class Player {
     console.log("player's details updated.");
   }
   moveByDice(dice) {
-    if (this.position + dice > 35) {
+    if (this.position + dice > 3) {
       // if (this.position + dice > 4) {
-      tiles[this.position + dice - 36].element.appendChild(this.tokenElement);
-      this.position = this.position + dice - 36;
+      tiles[this.position + dice - 4].element.appendChild(this.tokenElement);
+      this.position = this.position + dice - 4;
       // this.position = this.position + dice - 5;
     } else {
       tiles[this.position + dice].element.appendChild(this.tokenElement);

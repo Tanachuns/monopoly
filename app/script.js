@@ -139,6 +139,69 @@ function checkTile(currentPlayer, tile) {
         };
       }
     } else if (tile.type === "spacial") {
+      console.log(`tile:[${tile.id}]${tile.name}`);
+      if (tile.owner === "") {
+        console.log(`has no owner`);
+        popup.parentElement.style.display = "flex";
+        popup.innerHTML = `<h1>[${tile.id}] ${tile.name}(${
+          tileLevel[tile.lv]
+        }) </h1>
+            <p>type: ${tile.type}</p>
+            <img src="${tile.img}" alt="${tile.name}" width="300">
+            <p>Rent : ${tile.rent[tile.lv]} G</p>
+            <button id='buy-btn'>buy for ${tile.price} G</button>
+            <button id='cancel-btn'>close</button>`;
+        const cancelBtn = document.querySelector("#cancel-btn");
+        cancelBtn.onclick = () => {
+          popup.parentElement.style.display = "none";
+        };
+        const buyBtn = document.querySelector("#buy-btn");
+        buyBtn.onclick = () => {
+          if (currentPlayer.setMoney(-tile.price)) {
+            currentPlayer.assets.push(tile.id);
+            tile.owner = players.indexOf(currentPlayer);
+            tiles[tile.id].element.style.background = currentPlayer.color;
+            console.log(
+              currentPlayer.name + "buy",
+              tile.id,
+              tile.name,
+              "he has ",
+              currentPlayer.assets
+            );
+            popup.parentElement.style.display = "none";
+            allUpdate();
+          } else {
+            currentPlayer.removePlayer("bankrupt");
+          }
+        };
+      } else {
+        console.log("time to pay rent");
+        popup.parentElement.style.display = "flex";
+        popup.innerHTML = `<h1>[${tile.id}] ${tile.name}(${
+          tileLevel[tile.lv]
+        }) </h1>
+              <p>type: ${tile.type}</p>
+              <img src="${tile.img}" alt="${tile.name}" width="300">
+              <p>Rent : ${tile.rent[tile.lv]} G</p>
+              <button id='rent-btn'>pay ${tile.rent[tile.lv]} G</button>`;
+        const rentBtn = document.querySelector("#rent-btn");
+        rentBtn.onclick = () => {
+          if (currentPlayer.setMoney(-tile.rent[tile.lv])) {
+            players[tile.owner].setMoney(tile.rent[tile.lv]);
+            console.log(
+              currentPlayer.name,
+              " pay ",
+              tile.rent[tile.lv],
+              "G to ",
+              players[tile.owner].name
+            );
+            popup.parentElement.style.display = "none";
+            allUpdate();
+          } else {
+            currentPlayer.removePlayer("bankrupt");
+          }
+        };
+      }
     } else if (tile.type === "treasure") {
     } else if (tile.type === "stop") {
     } else if (tile.type === "teleport") {
@@ -160,9 +223,9 @@ function allUpdate() {
 
 function rolls() {
   turn === players.length ? (turn = 0) : (turn = turn);
-  const dice = Math.floor(Math.random() * 6) + 1;
+  // const dice = Math.floor(Math.random() * 6) + 1;
   if (players.length > 1) {
-    // const dice = 1; //for test
+    const dice = 1; //for test
     diceElement.style.backgroundImage = `url("../src/images/dice/dice-six-faces-${diceFaces[dice]}.png")`;
     let currentPlayer = players[turn];
 
