@@ -28,12 +28,8 @@ tiles.forEach((tile) => {
 let players = [];
 players.push(new Player(0, "Player 1", "red"));
 players.push(new Player(1, "Player 2", "blue"));
-// players.push(new Player(2, "Player 3", "green"));
+players.push(new Player(2, "Player 3", "green"));
 // console.log(players);
-
-players[0].addAsset(16);
-players[0].addAsset(20);
-players[0].addAsset(28);
 
 //roll a dice
 const buttonRoll = document.querySelector("#roll");
@@ -209,6 +205,49 @@ function checkTile(currentPlayer, tile) {
     } else if (tile.type === "treasure") {
     } else if (tile.type === "stop") {
     } else if (tile.type === "teleport") {
+      console.log(`has no owner`);
+      popup.parentElement.style.display = "flex";
+      popup.innerHTML = `<h1>[${tile.id}] ${tile.name}(${
+        tileLevel[tile.lv]
+      }) </h1>
+            <p>type: ${tile.type}</p>
+            <img src="${tile.img}" alt="${tile.name}" width="300"><br>
+            <label for="tiles">Choose your destination:</label>
+        <select name="tiles" id="tele-tiles">
+            
+        </select>
+        <br>
+        <br>
+            <button id='tele-btn'>Teleport 500G</button>
+            <button id='cancel-btn'>close</button>`;
+
+      const cancelBtn = document.querySelector("#cancel-btn");
+      cancelBtn.onclick = () => {
+        popup.parentElement.style.display = "none";
+      };
+      const teleBtn = document.querySelector("#tele-btn");
+      const destination = document.querySelector("#tele-tiles");
+      tiles.forEach((tile) => {
+        const newTile = document.createElement("option");
+        newTile.value = tile.id;
+        newTile.innerText = `[${tile.id}]  ${tile.name}`;
+        destination.appendChild(newTile);
+      });
+
+      teleBtn.onclick = () => {
+        if (currentPlayer.setMoney(-500)) {
+          currentPlayer.moveTo(destination.value);
+          console.log("Teleported to " + destination.value);
+          popup.parentElement.style.display = "none";
+          allUpdate();
+          setTimeout(
+            () => checkTile(currentPlayer, tiles[currentPlayer.position]),
+            1000
+          );
+        } else {
+          currentPlayer.removePlayer("bankrupt");
+        }
+      };
     } else if (tile.type === "tostop") {
     } else if (tile.type === "tax") {
     }
@@ -240,7 +279,7 @@ function rolls() {
   turn === players.length ? (turn = 0) : (turn = turn);
   // const dice = Math.floor(Math.random() * 6) + 1;
   if (players.length > 1) {
-    const dice = 1; //for test
+    const dice = 18; //for test
     diceElement.style.backgroundImage = `url("../src/images/dice/dice-six-faces-${diceFaces[dice]}.png")`;
     let currentPlayer = players[turn];
 

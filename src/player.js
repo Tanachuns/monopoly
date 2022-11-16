@@ -67,10 +67,10 @@ class Player {
     console.log("player's details updated.");
   }
   moveByDice(dice) {
-    if (this.position + dice > 3) {
+    if (this.position + dice > 35) {
       // if (this.position + dice > 4) {
-      tiles[this.position + dice - 4].element.appendChild(this.tokenElement);
-      this.position = this.position + dice - 4;
+      tiles[this.position + dice - 36].element.appendChild(this.tokenElement);
+      this.position = this.position + dice - 36;
       // this.position = this.position + dice - 5;
     } else {
       tiles[this.position + dice].element.appendChild(this.tokenElement);
@@ -78,7 +78,14 @@ class Player {
     }
     console.log(this.name, "rolls ", dice, "then move to", this.position);
   }
-  moveTo(tile) {}
+  moveTo(tileId) {
+    if (tileId <= 18) {
+      console.log(this.name + " passed start get 200G");
+      this.setMoney(200);
+    }
+    tiles[tileId].element.appendChild(this.tokenElement);
+    this.position = tileId;
+  }
   toggleSkip() {
     this.isPlaying = !this.isPlaying;
   }
