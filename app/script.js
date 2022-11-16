@@ -120,14 +120,19 @@ function checkTile(currentPlayer, tile) {
         const rentBtn = document.querySelector("#rent-btn");
         rentBtn.onclick = () => {
           if (currentPlayer.setMoney(-tile.rent[tile.lv])) {
-            players[tile.owner].setMoney(tile.rent[tile.lv]);
-            console.log(
-              currentPlayer.name,
-              " pay ",
-              tile.rent[tile.lv],
-              "G to ",
-              players[tile.owner].name
-            );
+            console.log(tile.owner);
+            players.forEach((player) => {
+              if (player.id == tile.owner) {
+                player.setMoney(tile.rent[tile.lv]);
+                console.log(
+                  currentPlayer.name,
+                  " pay ",
+                  tile.rent[tile.lv],
+                  "G to ",
+                  player.name
+                );
+              }
+            });
             popup.parentElement.style.display = "none";
             allUpdate();
           } else {
@@ -196,14 +201,18 @@ function checkTile(currentPlayer, tile) {
         const rentBtn = document.querySelector("#rent-btn");
         rentBtn.onclick = () => {
           if (currentPlayer.setMoney(-tile.rent[tile.lv])) {
-            players[tile.owner].setMoney(tile.rent[tile.lv]);
-            console.log(
-              currentPlayer.name,
-              " pay ",
-              tile.rent[tile.lv],
-              "G to ",
-              players[tile.owner].name
-            );
+            players.forEach((player) => {
+              if (player.id == tile.owner) {
+                player.setMoney(tile.rent[tile.lv]);
+                console.log(
+                  currentPlayer.name,
+                  " pay ",
+                  tile.rent[tile.lv],
+                  "G to ",
+                  players[tile.owner].name
+                );
+              }
+            });
             popup.parentElement.style.display = "none";
             allUpdate();
           } else {
@@ -318,10 +327,10 @@ function endGame(reason = "Last man standing.") {
 
 function rolls() {
   turn === players.length ? (turn = 0) : (turn = turn);
-  const dice = Math.floor(Math.random() * 6) + 1;
+  // const dice = Math.floor(Math.random() * 6) + 1;
   let currentPlayer = players[turn];
   if (players.length > 1) {
-    // const dice = 18; //for test
+    const dice = 18; //for test
     diceElement.style.backgroundImage = `url("../src/images/dice/dice-six-faces-${diceFaces[dice]}.png")`;
 
     if (currentPlayer.skipTurn > 0) {

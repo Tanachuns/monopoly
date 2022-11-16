@@ -58,10 +58,10 @@ tiles.push(
 tiles.push(
   new Tile(
     4,
-    "South Mountrain",
+    "South Mountrain Aka Overpriced Land",
     "normal",
     "https://img.freepik.com/premium-photo/artwork-is-fabulous-landscape-mountains-rocks-fantasy-sketch-amazing-nature-artwork-sketch-beautiful-mountain-peaks-illustration_86390-6638.jpg?",
-    60,
+    600000000,
     [2, 10, 120, 250]
   )
 );
