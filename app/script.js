@@ -38,7 +38,9 @@ players.push(new Player(2, "Player 3", "green"));
 const buttonRoll = document.querySelector("#roll");
 const buttonEnd = document.querySelector("#end");
 const playerTurn = document.querySelector("#turn");
-const diceElement = document.querySelector("#dice-1");
+const dice1Element = document.querySelector("#dice-1");
+const dice2Element = document.querySelector("#dice-2");
+
 let turn = 0;
 const diceFaces = ["zero", "one", "two", "three", "four", "five", "six"];
 const tileLevel = ["Camp", "House", "City", "Barrack"];
@@ -54,7 +56,7 @@ function checkTile(currentPlayer, tile) {
           tileLevel[tile.lv]
         }) </h1>
             <p>type: ${tile.type}</p>
-            <img src="${tile.img}" alt="${tile.name}" height="300">
+            <img src="${tile.img}" alt="${tile.name}" width="100">
             <p>Rent : ${tile.rent[tile.lv]} G</p>
             <button id='buy-btn'>buy for ${tile.price} G</button>
             <button id='cancel-btn'>close</button>`;
@@ -87,7 +89,7 @@ function checkTile(currentPlayer, tile) {
           tileLevel[tile.lv]
         }) </h1>
               <p>type: ${tile.type}</p>
-              <img src="${tile.img}" alt="${tile.name}" height="300">
+              <img src="${tile.img}" alt="${tile.name}" width="100">
               <p>Rent : ${tile.rent[tile.lv]} G</p>
               <button id='upgrade-btn'>upgrade for ${tile.upgrade} G</button>
               <button id='cancel-btn'>close</button>`;
@@ -113,7 +115,7 @@ function checkTile(currentPlayer, tile) {
           tileLevel[tile.lv]
         }) </h1>
               <p>type: ${tile.type}</p>
-              <img src="${tile.img}" alt="${tile.name}" height="300">
+              <img src="${tile.img}" alt="${tile.name}" width="100">
               <p>Rent : ${tile.rent[tile.lv]} G</p>
               <button id='rent-btn'>pay ${tile.rent[tile.lv]} G</button>`;
         const rentBtn = document.querySelector("#rent-btn");
@@ -148,7 +150,7 @@ function checkTile(currentPlayer, tile) {
           tileLevel[tile.lv]
         }) </h1>
             <p>type: ${tile.type}</p>
-            <img src="${tile.img}" alt="${tile.name}" height="300">
+            <img src="${tile.img}" alt="${tile.name}" width="100">
             <p>Rent : ${tile.rent[tile.lv]} G</p>
             <button id='buy-btn'>buy for ${tile.price} G</button>
             <button id='cancel-btn'>close</button>`;
@@ -180,7 +182,7 @@ function checkTile(currentPlayer, tile) {
         popup.parentElement.style.display = "flex";
         popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
               <p>type: ${tile.type}</p>
-              <img src="${tile.img}" alt="${tile.name}" height="300">
+              <img src="${tile.img}" alt="${tile.name}" width="100">
               <p>Welcome Back</p>
               <button id='cancel-btn'>close</button>`;
         const cancelBtn = document.querySelector("#cancel-btn");
@@ -194,7 +196,7 @@ function checkTile(currentPlayer, tile) {
           tileLevel[tile.lv]
         }) </h1>
               <p>type: ${tile.type}</p>
-              <img src="${tile.img}" alt="${tile.name}" height="300">
+              <img src="${tile.img}" alt="${tile.name}" width="100">
               <p>Rent : ${tile.rent[tile.lv]} G</p>
               <button id='rent-btn'>pay ${tile.rent[tile.lv]} G</button>`;
         const rentBtn = document.querySelector("#rent-btn");
@@ -227,7 +229,7 @@ function checkTile(currentPlayer, tile) {
       popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
             <p>Treasure: ${card.name}</p>
             <p>${card.desc}</p>
-            <img src="${card.img}" alt="${card.name}" height="300"><br>
+            <img src="${card.img}" alt="${card.name}" width="100"><br>
             <button id='draw-btn'>Take a treasure</button>`;
 
       const drawBtn = document.querySelector("#draw-btn");
@@ -244,7 +246,7 @@ function checkTile(currentPlayer, tile) {
       popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
             <p>Event: ${card.name}</p>
             <p>${card.desc}</p>
-            <img src="${card.img}" alt="${card.name}" height="300"><br>
+            <img src="${card.img}" alt="${card.name}" width="100"><br>
             <button id='draw-btn'>close</button>`;
 
       const drawBtn = document.querySelector("#draw-btn");
@@ -258,7 +260,7 @@ function checkTile(currentPlayer, tile) {
       popup.parentElement.style.display = "flex";
       popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
             <p>type: ${tile.type}</p>
-            <img src="${tile.img}" alt="${tile.name}" height="300"><br>
+            <img src="${tile.img}" alt="${tile.name}" width="100"><br>
             <p>You got captured by Orc Army!</p>
             <p><strong>Skip 2 turns</strong></p>
             <button id='cancel-btn'>close</button>`;
@@ -272,7 +274,7 @@ function checkTile(currentPlayer, tile) {
       popup.parentElement.style.display = "flex";
       popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
             <p>type: ${tile.type}</p>
-            <img src="${tile.img}" alt="${tile.name}" height="300"><br>
+            <img src="${tile.img}" alt="${tile.name}" width="100"><br>
             <label for="tiles">Choose your destination:</label>
         <select name="tiles" id="tele-tiles">
             
@@ -314,7 +316,7 @@ function checkTile(currentPlayer, tile) {
       popup.parentElement.style.display = "flex";
       popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
             <p>type: ${tile.type}</p>
-            <img src="${tile.img}" alt="${tile.name}" height="300"><br>
+            <img src="${tile.img}" alt="${tile.name}" width="100"><br>
             <p>You got captured by Orc Army!</p>
             <button id='cancel-btn'>Go to Orc Village</button>`;
       const cancelBtn = document.querySelector("#cancel-btn");
@@ -359,11 +361,15 @@ function endGame(reason = "Last man standing.") {
 
 function rolls() {
   turn === players.length ? (turn = 0) : (turn = turn);
-  // const dice = Math.floor(Math.random() * 6) + 1;
+  const dice1 = Math.floor(Math.random() * 6) + 1;
+  const dice2 = Math.floor(Math.random() * 6) + 1;
+  console.log(dice1, dice2);
   let currentPlayer = players[turn];
   if (players.length > 1) {
-    const dice = 18; //for test
-    diceElement.style.backgroundImage = `url("../src/images/dice/dice-six-faces-${diceFaces[dice]}.png")`;
+    const dice = dice1 + dice2;
+    // const dice = 18; //for test
+    dice1Element.style.backgroundImage = `url("../src/images/dice/dice-six-faces-${diceFaces[dice1]}.png")`;
+    dice2Element.style.backgroundImage = `url("../src/images/dice/dice-six-faces-${diceFaces[dice2]}.png")`;
 
     if (currentPlayer.skipTurn > 0) {
       currentPlayer.skip(-1);
