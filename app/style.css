@@ -66,11 +66,21 @@ body{
 }
 
 .deck{
-    background: url("https://pbs.twimg.com/media/E1r5SgMWQAkHoyR.png");
-    background-size: cover;
     width: 24%;
     height: 80%;
 }
+
+#deck-1{
+    background: url("https://i.pinimg.com/originals/bc/14/67/bc14679feb4ebe474f70c0f68fe60eb2.jpg");
+    background-size: cover;
+    
+}
+#deck-2 {
+    background: url("https://cdnb.artstation.com/p/assets/images/images/000/285/281/large/Treasure_Card_No_Bleed.jpg");
+    background-size: cover;
+
+}
+
 
 .board-east {
     display: flex;

@@ -31,6 +31,11 @@ players.push(new Player(1, "Player 2", "blue"));
 players.push(new Player(2, "Player 3", "green"));
 // console.log(players);
 
+//spacial wincon test
+players[0].addAsset(16);
+players[0].addAsset(20);
+players[0].addAsset(28);
+
 //roll a dice
 const buttonRoll = document.querySelector("#roll");
 const buttonEnd = document.querySelector("#end");
@@ -205,11 +210,9 @@ function checkTile(currentPlayer, tile) {
     } else if (tile.type === "treasure") {
     } else if (tile.type === "stop") {
     } else if (tile.type === "teleport") {
-      console.log(`has no owner`);
+      console.log(currentPlayer.name + ` found Ancient Portal Gate.`);
       popup.parentElement.style.display = "flex";
-      popup.innerHTML = `<h1>[${tile.id}] ${tile.name}(${
-        tileLevel[tile.lv]
-      }) </h1>
+      popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
             <p>type: ${tile.type}</p>
             <img src="${tile.img}" alt="${tile.name}" width="300"><br>
             <label for="tiles">Choose your destination:</label>
@@ -237,9 +240,10 @@ function checkTile(currentPlayer, tile) {
       teleBtn.onclick = () => {
         if (currentPlayer.setMoney(-500)) {
           currentPlayer.moveTo(destination.value);
-          console.log("Teleported to " + destination.value);
+
           popup.parentElement.style.display = "none";
           allUpdate();
+          console.log("Teleported to " + destination.value);
           setTimeout(
             () => checkTile(currentPlayer, tiles[currentPlayer.position]),
             1000
@@ -264,9 +268,10 @@ function allUpdate() {
   });
 }
 
-function endGame() {
+function endGame(reason = "Last man standing.") {
   popup.parentElement.style.display = "flex";
   popup.innerHTML = `<h1>${players[0].name} is Winner.</h1>
+              <p>reason: ${reason}</p>
               <button id='cancel-btn'>close</button>`;
   const cancelBtn = document.querySelector("#cancel-btn");
   cancelBtn.onclick = () => {

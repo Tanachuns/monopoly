@@ -48,12 +48,11 @@ class Player {
       }
     });
     console.log(
-      this.name +
-        ` has ` +
-        spacial +
-        " Temples, The Demon Lord is coming.coming"
+      this.name + ` has ` + spacial + " Temples, The Demon Lord is coming"
     );
-    spacial === 4 ? endGame() : (spacial = 0);
+    spacial === 4
+      ? endGame(this.name + " has summoned Demon Lord and Killed all of you.")
+      : (spacial = 0);
     this.detailsElement.innerHTML = `
         <h2>${this.name}</h2>
         <p>Money : ${this.money}</p>
