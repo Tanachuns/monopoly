@@ -125,7 +125,7 @@ class Player {
     tiles.forEach((tile) => {
       if (tile.owner == this.id) {
         tile.owner = "";
-        tile.setColor("gray");
+        tile.setColor("lightgray");
       }
     });
     console.log(this.name, " is out!");

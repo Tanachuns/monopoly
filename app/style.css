@@ -5,8 +5,7 @@ body{
 
 .board{
     margin: 1em;
-    background-color: gainsboro;
-    width: 60vw;
+    width: 100vw;
     height: 95vh;
     display: flex;
     flex-direction: column;
@@ -37,6 +36,8 @@ body{
     text-align: center;
     flex-direction: column;
     justify-content: space-around;
+    background-image: url("https://i.pinimg.com/originals/2d/b0/33/2db033a93d7db5eba3a65e000a595b2f.jpg");
+    background-size: cover;
 }
 
 .card-pile{
@@ -66,8 +67,8 @@ body{
 }
 
 .deck{
-    width: 24%;
-    height: 80%;
+    width: 146px;
+    height: 209px;
 }
 
 #deck-1{
@@ -96,13 +97,13 @@ body{
 }
 .tile {
     outline: 1px solid black;
-    background: gray;
+    background: lightgray;
 
 }
 
 .tile-corner{
-    color: pink;
-    background: gray;
+    color: darkgreen;
+    background: lightgray;
     height: 100%;
     width: 10%;
     
@@ -133,20 +134,20 @@ body{
 }
 
 .player-details{
+
+    padding: 0.3em;
     width: 200px;
     height: 200px;
-    border: 2px solid black;
     margin: 1em;
-    padding: .2em;
     display: block;
     overflow: scroll;
+    border: 1px solid black;
 }
 .popup-contrainer{
     background-color: rgba(0, 0, 0,.5);
     position: absolute;
     width: 100vw;
     height: 100vh;
-    
     display: none;
 }
 
