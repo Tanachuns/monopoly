@@ -115,6 +115,7 @@ body{
     height: 30px;
     border: 1px solid black;
     background-size: cover;
+    position: absolute;
 }
 
 .player-contrainer{
@@ -135,8 +136,7 @@ body{
     position: absolute;
     width: 100vw;
     height: 100vh;
-    justify-content: center;
-    align-items: center;
+    
     display: none;
 }
 
@@ -146,6 +146,10 @@ body{
     height: 500px;
     background-color: white;
     z-index: 10;
-    margin: auto;
-
+    margin: 10%;
 }
+
+#end {
+    display: none;
+}
+

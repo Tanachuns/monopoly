@@ -32,7 +32,8 @@ players.push(new Player(2, "Player 3", "green"));
 // console.log(players);
 
 //roll a dice
-const button = document.querySelector("#roll");
+const buttonRoll = document.querySelector("#roll");
+const buttonEnd = document.querySelector("#end");
 const playerTurn = document.querySelector("#turn");
 const diceElement = document.querySelector("#dice-1");
 let turn = 0;
@@ -170,10 +171,15 @@ function rolls() {
     } else {
       console.log("player in game");
       currentPlayer.moveByDice(dice);
-      checkTile(currentPlayer, tiles[currentPlayer.position]);
+      buttonRoll.style.display = "none";
+      setTimeout(() => {
+        buttonEnd.style.display = "block";
+      }, 1200);
+      setTimeout(
+        () => checkTile(currentPlayer, tiles[currentPlayer.position]),
+        1000
+      );
     }
-    turn < players.length - 1 ? (turn += 1) : (turn = 0);
-    playerTurn.innerHTML = players[turn].name + "'s Turn.";
   } else {
     popup.parentElement.style.display = "flex";
     popup.innerHTML = `<h1>${players[0].name} is Winner.</h1>
@@ -184,8 +190,20 @@ function rolls() {
     };
   }
 }
+
+function endTurn() {
+  buttonEnd.style.display = "none";
+  setTimeout(() => {
+    buttonRoll.style.display = "block";
+  }, 200);
+  turn < players.length - 1 ? (turn += 1) : (turn = 0);
+  playerTurn.innerHTML = players[turn].name + "'s Turn.";
+}
+
 playerTurn.innerHTML = players[turn].name + "'s turn";
-button.onclick = () => rolls();
+buttonRoll.onclick = () => rolls();
+buttonEnd.onclick = () => endTurn();
+
 test.onclick = () => {
   players[1].removePlayer("test button");
 };
