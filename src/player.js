@@ -94,6 +94,7 @@ class Player {
       return false;
     } else {
       this.money += amount;
+      console.log(this.name + " " + amount);
       return true;
     }
   }

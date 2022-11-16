@@ -89,7 +89,7 @@ tiles.push(
   new Tile(
     7,
     "Old Man's Treasure.",
-    "Treasure",
+    "treasure",
     "https://i.pinimg.com/originals/fd/62/05/fd620538842fc20e805668c9ad10dc0e.jpg"
   )
 );
@@ -237,9 +237,9 @@ tiles.push(
 tiles.push(
   new Tile(
     22,
-    "Binteac's Treasure.",
-    "Treasure",
-    "https://i.pinimg.com/originals/3d/43/84/3d4384f2ae313b1fd0c495fe92f9bdf8.jpg"
+    "Black Market",
+    "event",
+    "https://i.pinimg.com/originals/95/ae/e7/95aee79d17959abc877b230e800de566.jpg"
   )
 );
 tiles.push(

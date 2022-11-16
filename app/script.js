@@ -1,4 +1,3 @@
-const test = document.querySelector(".testbtn");
 const popupContrainer = document.querySelector(".popup-contrainer");
 
 //get all tiles
@@ -55,7 +54,7 @@ function checkTile(currentPlayer, tile) {
           tileLevel[tile.lv]
         }) </h1>
             <p>type: ${tile.type}</p>
-            <img src="${tile.img}" alt="${tile.name}" width="300">
+            <img src="${tile.img}" alt="${tile.name}" height="300">
             <p>Rent : ${tile.rent[tile.lv]} G</p>
             <button id='buy-btn'>buy for ${tile.price} G</button>
             <button id='cancel-btn'>close</button>`;
@@ -88,7 +87,7 @@ function checkTile(currentPlayer, tile) {
           tileLevel[tile.lv]
         }) </h1>
               <p>type: ${tile.type}</p>
-              <img src="${tile.img}" alt="${tile.name}" width="300">
+              <img src="${tile.img}" alt="${tile.name}" height="300">
               <p>Rent : ${tile.rent[tile.lv]} G</p>
               <button id='upgrade-btn'>upgrade for ${tile.upgrade} G</button>
               <button id='cancel-btn'>close</button>`;
@@ -114,7 +113,7 @@ function checkTile(currentPlayer, tile) {
           tileLevel[tile.lv]
         }) </h1>
               <p>type: ${tile.type}</p>
-              <img src="${tile.img}" alt="${tile.name}" width="300">
+              <img src="${tile.img}" alt="${tile.name}" height="300">
               <p>Rent : ${tile.rent[tile.lv]} G</p>
               <button id='rent-btn'>pay ${tile.rent[tile.lv]} G</button>`;
         const rentBtn = document.querySelector("#rent-btn");
@@ -149,7 +148,7 @@ function checkTile(currentPlayer, tile) {
           tileLevel[tile.lv]
         }) </h1>
             <p>type: ${tile.type}</p>
-            <img src="${tile.img}" alt="${tile.name}" width="300">
+            <img src="${tile.img}" alt="${tile.name}" height="300">
             <p>Rent : ${tile.rent[tile.lv]} G</p>
             <button id='buy-btn'>buy for ${tile.price} G</button>
             <button id='cancel-btn'>close</button>`;
@@ -181,7 +180,7 @@ function checkTile(currentPlayer, tile) {
         popup.parentElement.style.display = "flex";
         popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
               <p>type: ${tile.type}</p>
-              <img src="${tile.img}" alt="${tile.name}" width="300">
+              <img src="${tile.img}" alt="${tile.name}" height="300">
               <p>Welcome Back</p>
               <button id='cancel-btn'>close</button>`;
         const cancelBtn = document.querySelector("#cancel-btn");
@@ -195,7 +194,7 @@ function checkTile(currentPlayer, tile) {
           tileLevel[tile.lv]
         }) </h1>
               <p>type: ${tile.type}</p>
-              <img src="${tile.img}" alt="${tile.name}" width="300">
+              <img src="${tile.img}" alt="${tile.name}" height="300">
               <p>Rent : ${tile.rent[tile.lv]} G</p>
               <button id='rent-btn'>pay ${tile.rent[tile.lv]} G</button>`;
         const rentBtn = document.querySelector("#rent-btn");
@@ -221,12 +220,45 @@ function checkTile(currentPlayer, tile) {
         };
       }
     } else if (tile.type === "treasure") {
+      console.log(currentPlayer.name + ` found a treasure!`);
+      popup.parentElement.style.display = "flex";
+      let draw = Math.floor(Math.random() * (treasures.length - 1));
+      let card = treasures[draw];
+      popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
+            <p>Treasure: ${card.name}</p>
+            <p>${card.desc}</p>
+            <img src="${card.img}" alt="${card.name}" height="300"><br>
+            <button id='draw-btn'>Take a treasure</button>`;
+
+      const drawBtn = document.querySelector("#draw-btn");
+      drawBtn.onclick = () => {
+        card.effect(currentPlayer);
+        allUpdate();
+        popup.parentElement.style.display = "none";
+      };
+    } else if (tile.type === "event") {
+      console.log(currentPlayer.name + ` found a event!`);
+      popup.parentElement.style.display = "flex";
+      let draw = Math.floor(Math.random() * (events.length - 1));
+      let card = events[draw];
+      popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
+            <p>Event: ${card.name}</p>
+            <p>${card.desc}</p>
+            <img src="${card.img}" alt="${card.name}" height="300"><br>
+            <button id='draw-btn'>close</button>`;
+
+      const drawBtn = document.querySelector("#draw-btn");
+      drawBtn.onclick = () => {
+        card.effect(currentPlayer);
+        allUpdate();
+        popup.parentElement.style.display = "none";
+      };
     } else if (tile.type === "stop") {
       console.log(currentPlayer.name + ` found Orc Village.`);
       popup.parentElement.style.display = "flex";
       popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
             <p>type: ${tile.type}</p>
-            <img src="${tile.img}" alt="${tile.name}" width="300"><br>
+            <img src="${tile.img}" alt="${tile.name}" height="300"><br>
             <p>You got captured by Orc Army!</p>
             <p><strong>Skip 2 turns</strong></p>
             <button id='cancel-btn'>close</button>`;
@@ -240,7 +272,7 @@ function checkTile(currentPlayer, tile) {
       popup.parentElement.style.display = "flex";
       popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
             <p>type: ${tile.type}</p>
-            <img src="${tile.img}" alt="${tile.name}" width="300"><br>
+            <img src="${tile.img}" alt="${tile.name}" height="300"><br>
             <label for="tiles">Choose your destination:</label>
         <select name="tiles" id="tele-tiles">
             
@@ -282,7 +314,7 @@ function checkTile(currentPlayer, tile) {
       popup.parentElement.style.display = "flex";
       popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
             <p>type: ${tile.type}</p>
-            <img src="${tile.img}" alt="${tile.name}" width="300"><br>
+            <img src="${tile.img}" alt="${tile.name}" height="300"><br>
             <p>You got captured by Orc Army!</p>
             <button id='cancel-btn'>Go to Orc Village</button>`;
       const cancelBtn = document.querySelector("#cancel-btn");
@@ -375,7 +407,3 @@ allUpdate();
 playerTurn.innerHTML = players[turn].name + "'s turn";
 buttonRoll.onclick = () => rolls();
 buttonEnd.onclick = () => endTurn();
-
-test.onclick = () => {
-  players[1].removePlayer("test button");
-};
