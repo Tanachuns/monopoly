@@ -383,8 +383,8 @@ function rolls() {
   if (players.length > 1) {
     const dice = dice1 + dice2;
     // const dice = 18; //for test
-    dice1Element.style.backgroundImage = `url("../src/images/dice/dice-six-faces-${diceFaces[dice1]}.png")`;
-    dice2Element.style.backgroundImage = `url("../src/images/dice/dice-six-faces-${diceFaces[dice2]}.png")`;
+    dice1Element.style.backgroundImage = `url("/monopoly/src/images/dice/dice-six-faces-${diceFaces[dice1]}.png")`;
+    dice2Element.style.backgroundImage = `url("/monopoly/src/images/dice/dice-six-faces-${diceFaces[dice2]}.png")`;
 
     if (currentPlayer.skipTurn > 0) {
       currentPlayer.skip(-1);
