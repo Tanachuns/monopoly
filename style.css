@@ -56,7 +56,7 @@ body{
     margin: 1em;
     width: 50px;
     height: 50px;
-    background-image: url("../src/images/dice/dice-six-faces-zero.png");
+    background-image: url("/monopoly/src/images/dice/dice-six-faces-zero.png");
     background-size: cover;
 }
 

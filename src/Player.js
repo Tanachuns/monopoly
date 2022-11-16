@@ -15,7 +15,7 @@ class Player {
     //create token
     this.tokenElement = document.createElement("div");
     this.tokenElement.className = "player-token";
-    this.tokenElement.style.backgroundImage = `url("../src/images/token.png")`;
+    this.tokenElement.style.backgroundImage = `url("/monopoly/src/images/token.png")`;
     this.tokenElement.style.borderColor = color;
     tiles[this.position].element.appendChild(this.tokenElement);
     // console.log(this.tokenElement);
