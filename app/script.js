@@ -31,9 +31,9 @@ players.push(new Player(2, "Player 3", "green"));
 // console.log(players);
 
 //spacial wincon test
-players[0].addAsset(16);
-players[0].addAsset(20);
-players[0].addAsset(28);
+// players[0].addAsset(16);
+// players[0].addAsset(20);
+// players[0].addAsset(28);
 
 //roll a dice
 const buttonRoll = document.querySelector("#roll");
@@ -100,13 +100,7 @@ function checkTile(currentPlayer, tile) {
         upgradeBtn.onclick = () => {
           if (currentPlayer.setMoney(-tile.upgrade)) {
             tile.lv += 1;
-            console.log(
-              tile.name,
-              " has upgraded from",
-              tileLevel[tile.lv - 1],
-              " to ",
-              tileLevel[tile.lv]
-            );
+
             popup.parentElement.style.display = "none";
             allUpdate();
           } else {
@@ -176,6 +170,18 @@ function checkTile(currentPlayer, tile) {
           } else {
             currentPlayer.removePlayer("bankrupt");
           }
+        };
+      } else if (tile.owner === currentPlayer.id) {
+        console.log("time to upgrade");
+        popup.parentElement.style.display = "flex";
+        popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
+              <p>type: ${tile.type}</p>
+              <img src="${tile.img}" alt="${tile.name}" width="300">
+              <p>Welcome Back</p>
+              <button id='cancel-btn'>close</button>`;
+        const cancelBtn = document.querySelector("#cancel-btn");
+        cancelBtn.onclick = () => {
+          popup.parentElement.style.display = "none";
         };
       } else {
         console.log("time to pay rent");
@@ -254,7 +260,6 @@ function checkTile(currentPlayer, tile) {
 
           popup.parentElement.style.display = "none";
           allUpdate();
-          console.log("Teleported to " + destination.value);
           setTimeout(
             () => checkTile(currentPlayer, tiles[currentPlayer.position]),
             1000
@@ -313,16 +318,16 @@ function endGame(reason = "Last man standing.") {
 
 function rolls() {
   turn === players.length ? (turn = 0) : (turn = turn);
-  // const dice = Math.floor(Math.random() * 6) + 1;
+  const dice = Math.floor(Math.random() * 6) + 1;
   let currentPlayer = players[turn];
-  console.log(turn, currentPlayer, players);
   if (players.length > 1) {
-    const dice = 18; //for test
+    // const dice = 18; //for test
     diceElement.style.backgroundImage = `url("../src/images/dice/dice-six-faces-${diceFaces[dice]}.png")`;
 
     if (currentPlayer.skipTurn > 0) {
       currentPlayer.skip(-1);
-      console.log("player skip for " + currentPlayer.skipTurn + " turns");
+
+      console.log("player has " + currentPlayer.skipTurn + " skip turn.");
       buttonRoll.style.display = "none";
       setTimeout(() => {
         buttonEnd.style.display = "block";
@@ -350,6 +355,9 @@ function endTurn() {
     buttonRoll.style.display = "block";
   }, 200);
   turn < players.length - 1 ? (turn += 1) : (turn = 0);
+  console.log("Turn ended.");
+  console.log("========================================");
+  console.log(players[turn].name + "'s Turn.");
   playerTurn.innerHTML = players[turn].name + "'s Turn.";
 }
 

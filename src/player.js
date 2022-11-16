@@ -47,9 +47,6 @@ class Player {
         spacial += 1;
       }
     });
-    console.log(
-      this.name + ` has ` + spacial + " Temples, The Demon Lord is coming"
-    );
     spacial === 4
       ? endGame(this.name + " has summoned Demon Lord and Killed all of you.")
       : (spacial = 0);
@@ -67,6 +64,8 @@ class Player {
   }
   moveByDice(dice) {
     if (this.position + dice > 35) {
+      console.log(this.name + " passed start get 200G");
+      this.setMoney(200);
       console.log(tiles[this.position + dice - 36]);
       // if (this.position + dice > 4) {
       tiles[this.position + dice - 36].element.appendChild(this.tokenElement);
@@ -85,7 +84,7 @@ class Player {
     }
     tiles[tileId].element.appendChild(this.tokenElement);
     this.position = parseInt(tileId);
-    console.log(this.name, " moved to ", tileId, this.position);
+    console.log(this.name, " moved to ", this.position);
   }
   skip(turns) {
     this.skipTurn += turns;
@@ -100,13 +99,6 @@ class Player {
   }
 
   addAsset(id) {
-    console.log(
-      "add Asset ",
-      id,
-      tiles[id],
-      tiles[id].owner,
-      players[players.indexOf(this)]
-    );
     this.assets.push(id);
     tiles[id].setOwner(this.id);
     tiles[id].setColor(this.color);
