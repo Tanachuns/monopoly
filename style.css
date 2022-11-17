@@ -51,8 +51,7 @@ body>*{
     margin: 5%;
 }
 .dice-pile{
-    display: flex;
-
+    display: none;
     justify-content: center;
 }
 
@@ -102,7 +101,16 @@ body>*{
 .tile {
     outline: 1px solid black;
     background: lightgray;
+    text-align: center;
 
+}
+
+.tile-inside{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
 }
 
 .tile-corner{
@@ -112,8 +120,6 @@ body>*{
     width: 10%;
     
 }
-
-
 
 .tile-horizontal{
     height: 100%;

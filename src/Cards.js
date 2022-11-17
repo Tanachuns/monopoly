@@ -34,9 +34,9 @@ treasures.push(
 
 events.push(
   new Card(
-    "Waylay",
+    "Robbery",
     "You got robbed.(-100G)",
-    "https://gwent.pro/img/721-big.jpg",
+    "https://i.pinimg.com/originals/2a/21/36/2a213695d809590e11431064a5ca1da0.jpg",
     function (player) {
       player.setMoney(-100);
     }

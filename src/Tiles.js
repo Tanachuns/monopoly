@@ -157,9 +157,9 @@ tiles.push(
 tiles.push(
   new Tile(
     14,
-    "Orc Lord's Raid.",
+    "Secret Shop.",
     "event",
-    "https://images.squarespace-cdn.com/content/v1/586fb9819f7456494bb601c3/1658750939224-X65ICQI94VRESVQASX8C/158335_1920x1342.jpg?"
+    "https://i0.wp.com/www.calliopesprisoner.co.uk/wp-content/uploads/2019/09/veronika-firsova-fantasy-shop-1.jpg?"
   )
 );
 tiles.push(

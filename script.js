@@ -4,10 +4,10 @@ const popupContrainer = document.querySelector(".popup-contrainer");
 tiles.forEach((tile) => {
   tile.element.onclick = () => {
     popup.parentElement.style.display = "flex";
-    tile.type === "normal"
-      ? (popup.innerHTML = `<h1>[${tile.id}] ${tile.name}(${
-          tileLevel[tile.lv]
-        }) </h1>
+    if (tile.type === "normal") {
+      popup.innerHTML = `<h1>[${tile.id}] ${tile.name}(${
+        tileLevel[tile.lv]
+      }) </h1>
             <p>type: ${tile.type}</p>
             <p>Owner: ${players.map((player) => {
               if (player.id === tile.owner) {
@@ -17,17 +17,32 @@ tiles.forEach((tile) => {
             <img src="${tile.img}" alt="${tile.name}" width="300">
             <p>Price : ${tile.price} G</p>
             <p>Rent : ${tile.rent[tile.lv]} G</p>
-            <button id='cancel-btn'>close</button>`)
-      : (popup.innerHTML = `<h1>[${tile.id}] ${tile.name} </h1>
+            <button id='cancel-btn'>close</button>`;
+      const cancelBtn = document.querySelector("#cancel-btn");
+      cancelBtn.onclick = () => {
+        popup.parentElement.style.display = "none";
+      };
+    } else if (tile.type === "spacial") {
+      popup.innerHTML = `<h1>[${tile.id}] ${tile.name} </h1>
             <p>type: ${tile.type}</p>
             <img src="${tile.img}" alt="${tile.name}" width="300">
             <p>Price : ${tile.price} G</p>
             <p>Rent : ${tile.rent[tile.lv]} G</p>
-            <button id='cancel-btn'>close</button>`);
-    const cancelBtn = document.querySelector("#cancel-btn");
-    cancelBtn.onclick = () => {
-      popup.parentElement.style.display = "none";
-    };
+            <button id='cancel-btn'>close</button>`;
+      const cancelBtn = document.querySelector("#cancel-btn");
+      cancelBtn.onclick = () => {
+        popup.parentElement.style.display = "none";
+      };
+    } else {
+      popup.innerHTML = `<h1>[${tile.id}] ${tile.name} </h1>
+            <p>type: ${tile.type}</p>
+            <img src="${tile.img}" alt="${tile.name}" width="300"><br>
+            <button id='cancel-btn'>close</button>`;
+      const cancelBtn = document.querySelector("#cancel-btn");
+      cancelBtn.onclick = () => {
+        popup.parentElement.style.display = "none";
+      };
+    }
   };
 });
 
@@ -35,9 +50,14 @@ tiles.forEach((tile) => {
 
 //create test token
 let players = [];
-players.push(new Player(0, "Player 1", "red"));
-players.push(new Player(1, "Player 2", "blue"));
-players.push(new Player(3, "Player 3", "green"));
+function createPlayer() {
+  const color = "#" + Math.floor(Math.random() * 4096).toString(16);
+  players.push(
+    new Player(players.length, "Player " + (players.length + 1), color)
+  );
+  playerTurn.innerHTML = players[turn].name + "'s turn";
+  allUpdate();
+}
 
 // console.log(players);
 
@@ -52,6 +72,20 @@ const buttonEnd = document.querySelector("#end");
 const playerTurn = document.querySelector("#turn");
 const dice1Element = document.querySelector("#dice-1");
 const dice2Element = document.querySelector("#dice-2");
+const addPlayer = document.querySelector("#addPlayer");
+const start = document.querySelector("#start");
+const startForPresentation = document.querySelector("#start-presentation");
+const dicePile = document.querySelector(".dice-pile");
+
+function startGame() {
+  if (players.length < 2) {
+    alert("Need more player to start!");
+  } else {
+    startForPresentation.style.display = "none";
+    start.style.display = "none";
+    dicePile.style.display = "flex";
+  }
+}
 
 let turn = 0;
 const diceFaces = ["zero", "one", "two", "three", "four", "five", "six"];
@@ -439,15 +473,26 @@ function endGame(reason = "Last man standing.") {
     buttonEnd.style.display = "none";
   };
 }
+let isPresentaion = false;
+start.onclick = () => {
+  startGame();
+};
+startForPresentation.onclick = () => {
+  startGame();
+  isPresentaion = true;
+};
 
 function rolls() {
+  addPlayer.style.display = "none";
   turn === players.length ? (turn = 0) : (turn = turn);
   const dice1 = Math.floor(Math.random() * 6) + 1;
   const dice2 = Math.floor(Math.random() * 6) + 1;
   let currentPlayer = players[turn];
   if (players.length > 1) {
-    const dice = dice1 + dice2;
-    // const dice = 18; //for test teleport
+    let dice;
+    isPresentaion == true ? (dice = 18) : (dice = dice1 + dice2);
+
+    //for test teleport
     dice1Element.style.backgroundImage = `url("./src/images/dice/dice-six-faces-${diceFaces[dice1]}.png")`;
     dice2Element.style.backgroundImage = `url("./src/images/dice/dice-six-faces-${diceFaces[dice2]}.png")`;
 
@@ -503,8 +548,7 @@ function endTurn() {
   playerTurn.innerHTML = players[turn].name + "'s Turn.";
 }
 
-allUpdate();
-
-playerTurn.innerHTML = players[turn].name + "'s turn";
+addPlayer.onclick = () => createPlayer();
 buttonRoll.onclick = () => rolls();
 buttonEnd.onclick = () => endTurn();
+allUpdate();
