@@ -1,6 +1,10 @@
 body{
     display: flex;
+    overflow: hidden;
+}
 
+body>*{
+    margin: 1em;
 }
 
 .board{
