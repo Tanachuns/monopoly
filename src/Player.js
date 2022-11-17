@@ -105,8 +105,15 @@ class Player {
     tiles[id].setColor(this.color);
   }
 
-  removeAsset(asset) {
+  tranferAsset(asset, player) {
     this.assets = this.assets.filter((item) => item.id !== asset.id);
+    player.addAsset(asset);
+    tiles.forEach((tile) => {
+      if (tile.owner === this.id) {
+        tile.owner = player.id;
+        tile.setColor(player.color);
+      }
+    });
   }
 
   removePlayer(reason) {

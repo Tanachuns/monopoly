@@ -9,6 +9,11 @@ tiles.forEach((tile) => {
           tileLevel[tile.lv]
         }) </h1>
             <p>type: ${tile.type}</p>
+            <p>Owner: ${players.map((player) => {
+              if (player.id === tile.owner) {
+                return player.name;
+              }
+            })}</p>
             <img src="${tile.img}" alt="${tile.name}" width="300">
             <p>Price : ${tile.price} G</p>
             <p>Rent : ${tile.rent[tile.lv]} G</p>
@@ -126,7 +131,11 @@ function checkTile(currentPlayer, tile) {
               <p>type: ${tile.type}</p>
               <img src="${tile.img}" alt="${tile.name}" width="300">
               <p>Rent : ${tile.rent[tile.lv]} G</p>
-              <button id='rent-btn'>pay ${tile.rent[tile.lv]} G</button>`;
+              <button id='rent-btn'>pay ${tile.rent[tile.lv]} G</button>
+              <button id='rent-buy-btn'>pay rent and buy ${
+                tile.rent[tile.lv] + tile.reSale
+              } G</button>`;
+
         const rentBtn = document.querySelector("#rent-btn");
         rentBtn.onclick = () => {
           if (currentPlayer.setMoney(-tile.rent[tile.lv])) {
@@ -142,6 +151,29 @@ function checkTile(currentPlayer, tile) {
                 );
               }
             });
+            popup.parentElement.style.display = "none";
+            allUpdate();
+          } else {
+            currentPlayer.removePlayer("bankrupt");
+          }
+        };
+        const rentAndBuyBtn = document.querySelector("#rent-buy-btn");
+        rentAndBuyBtn.onclick = () => {
+          if (currentPlayer.setMoney(-(tile.rent[tile.lv] + tile.reSale))) {
+            for (let i = 0; i < players.length; i++) {
+              if (players[i].id == tile.owner) {
+                players[i].setMoney(tile.rent[tile.lv] + tile.reSale);
+                players[i].tranferAsset(tile.id, currentPlayer);
+                console.log(
+                  currentPlayer.name,
+                  " pay ",
+                  tile.rent[tile.lv] + tile.reSale,
+                  "G to ",
+                  players[i].name
+                );
+                break;
+              }
+            }
             popup.parentElement.style.display = "none";
             allUpdate();
           } else {
