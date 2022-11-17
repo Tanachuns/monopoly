@@ -106,7 +106,8 @@ class Player {
   }
 
   tranferAsset(asset, player) {
-    this.assets = this.assets.filter((item) => item.id !== asset);
+    console.log(asset);
+    this.assets.splice(this.assets.indexOf(asset), 1);
     player.addAsset(asset);
     tiles[asset].owner = this.id;
   }
