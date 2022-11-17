@@ -9,11 +9,11 @@ tiles.forEach((tile) => {
         tileLevel[tile.lv]
       }) </h1>
             <p>type: ${tile.type}</p>
-            <p>Owner: ${players.map((player) => {
-              if (player.id === tile.owner) {
-                return player.name;
-              }
-            })}</p>
+        ${
+          tile.owner === ""
+            ? "<p>Owner ID: - </p>"
+            : `<p>Owner ID:${tile.owner}</p>`
+        }
             <img src="${tile.img}" alt="${tile.name}" width="300">
             <p>Price : ${tile.price} G</p>
             <p>Rent : ${tile.rent[tile.lv]} G</p>
