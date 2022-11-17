@@ -14,7 +14,10 @@ A Fantasy Monopoly game on website.
 
 ## Installation
 
-You don't need to install this game, it has two ways to play. 1. You can play it here : https://tanachuns.github.io/monopoly/ 2. clone this repository and open index.html
+You don't need to install this game, It has two ways to play.
+
+1. You can play it here : https://tanachuns.github.io/monopoly/
+2. clone this repository and open index.html
 
 ## User Stories And Gameplay
 
@@ -36,7 +39,7 @@ Be the Last Man Standing, So It has 2 ways :
   - 2x Treasure
   - 2x Event
   - 1x Stop
-  -     1x Teleport
+  - 1x Teleport
   - 1x Move to stop
   - 1x Tax
 - Nx Player Token (3-4 is recommend.)
@@ -55,6 +58,7 @@ Click add player button to add player.
   - 0 Asset
 
 **Gameplay**
+
 You need at least 2 players to play, Then click Start button to start the game .
 
 > After I clicked Start the game as a **Player** , I want to move my token. So that I...
