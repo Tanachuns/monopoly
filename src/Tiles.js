@@ -22,7 +22,20 @@ class Tile {
 }
 
 const tiles = [];
-tiles.push(new Tile(0, "start", "start", "", "", 0, 0, 0, [], 0));
+tiles.push(
+  new Tile(
+    0,
+    "start",
+    "start",
+    "https://adventuresincardboard.com/wp-content/uploads/65490594_698772483909743_3928218191758622720_n.jpg",
+    "",
+    0,
+    0,
+    0,
+    [],
+    0
+  )
+);
 
 tiles.push(
   new Tile(
