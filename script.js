@@ -37,7 +37,7 @@ tiles.forEach((tile) => {
 let players = [];
 players.push(new Player(0, "Player 1", "red"));
 players.push(new Player(1, "Player 2", "blue"));
-players.push(new Player(2, "Player 3", "green"));
+// players.push(new Player(2, "Player 3", "green"));
 // players.push(new Player(3, "Player 4", "pink"));
 // players.push(new Player(4, "Player 5", "violet"));
 
@@ -448,8 +448,8 @@ function rolls() {
   const dice2 = Math.floor(Math.random() * 6) + 1;
   let currentPlayer = players[turn];
   if (players.length > 1) {
-    // const dice = dice1 + dice2;
-    const dice = 18; //for test teleport
+    const dice = dice1 + dice2;
+    // const dice = 18; //for test teleport
     dice1Element.style.backgroundImage = `url("./src/images/dice/dice-six-faces-${diceFaces[dice1]}.png")`;
     dice2Element.style.backgroundImage = `url("./src/images/dice/dice-six-faces-${diceFaces[dice2]}.png")`;
 
