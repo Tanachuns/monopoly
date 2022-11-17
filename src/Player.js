@@ -106,14 +106,9 @@ class Player {
   }
 
   tranferAsset(asset, player) {
-    this.assets = this.assets.filter((item) => item.id !== asset.id);
+    this.assets = this.assets.filter((item) => item.id !== asset);
     player.addAsset(asset);
-    tiles.forEach((tile) => {
-      if (tile.owner === this.id) {
-        tile.owner = player.id;
-        tile.setColor(player.color);
-      }
-    });
+    tiles[asset].owner = this.id;
   }
 
   removePlayer(reason) {

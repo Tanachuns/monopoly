@@ -448,8 +448,8 @@ function rolls() {
   const dice2 = Math.floor(Math.random() * 6) + 1;
   let currentPlayer = players[turn];
   if (players.length > 1) {
-    const dice = dice1 + dice2;
-    // const dice = 18; //for test
+    // const dice = dice1 + dice2;
+    const dice = 18; //for test teleport
     dice1Element.style.backgroundImage = `url("./src/images/dice/dice-six-faces-${diceFaces[dice1]}.png")`;
     dice2Element.style.backgroundImage = `url("./src/images/dice/dice-six-faces-${diceFaces[dice2]}.png")`;
 
