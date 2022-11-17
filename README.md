@@ -1,7 +1,7 @@
 # monopoly
 
-> Project Todo List : [click here](https://shorturl.at/iAN24)
-> Project Presentation Slide:[click here](https://docs.google.com/presentation/d/1nCm9conISVGeqiDZ_27Gzp1mKuYU76NZKyFHPgwTfAw/edit?usp=sharing)
+> Project Todo List : [click here](https://shorturl.at/iAN24) |
+> Project Presentation Slide : [click here](https://docs.google.com/presentation/d/1nCm9conISVGeqiDZ_27Gzp1mKuYU76NZKyFHPgwTfAw/edit?usp=sharing)
 
 A Fantasy Monopoly game on website.
 
