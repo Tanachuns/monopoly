@@ -42,3 +42,13 @@ events.push(
     }
   )
 );
+
+events.push(
+  new Card("Dragon Valley", "Move to Teleport", "", function (player) {
+    player.moveTo(18);
+    setTimeout(
+      () => checkTile(currentPlayer, tiles[currentPlayer.position]),
+      1000
+    );
+  })
+);

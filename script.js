@@ -4,14 +4,21 @@ const popupContrainer = document.querySelector(".popup-contrainer");
 tiles.forEach((tile) => {
   tile.element.onclick = () => {
     popup.parentElement.style.display = "flex";
-    popup.innerHTML = `<h1>[${tile.id}] ${tile.name}(${
-      tileLevel[tile.lv]
-    }) </h1>
+    tile.type === "normal"
+      ? (popup.innerHTML = `<h1>[${tile.id}] ${tile.name}(${
+          tileLevel[tile.lv]
+        }) </h1>
             <p>type: ${tile.type}</p>
             <img src="${tile.img}" alt="${tile.name}" width="300">
             <p>Price : ${tile.price} G</p>
             <p>Rent : ${tile.rent[tile.lv]} G</p>
-            <button id='cancel-btn'>close</button>`;
+            <button id='cancel-btn'>close</button>`)
+      : (popup.innerHTML = `<h1>[${tile.id}] ${tile.name} </h1>
+            <p>type: ${tile.type}</p>
+            <img src="${tile.img}" alt="${tile.name}" width="300">
+            <p>Price : ${tile.price} G</p>
+            <p>Rent : ${tile.rent[tile.lv]} G</p>
+            <button id='cancel-btn'>close</button>`);
     const cancelBtn = document.querySelector("#cancel-btn");
     cancelBtn.onclick = () => {
       popup.parentElement.style.display = "none";
@@ -225,8 +232,10 @@ function checkTile(currentPlayer, tile) {
     } else if (tile.type === "treasure") {
       console.log(currentPlayer.name + ` found a treasure!`);
       popup.parentElement.style.display = "flex";
-      let draw = Math.floor(Math.random() * (treasures.length - 1));
+      let draw = Math.floor(Math.random() * treasures.length);
       let card = treasures[draw];
+      console.log(card, draw);
+
       popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
             <p>Treasure: ${card.name}</p>
             <p>${card.desc}</p>
@@ -242,8 +251,9 @@ function checkTile(currentPlayer, tile) {
     } else if (tile.type === "event") {
       console.log(currentPlayer.name + ` found a event!`);
       popup.parentElement.style.display = "flex";
-      let draw = Math.floor(Math.random() * (events.length - 1));
+      let draw = Math.floor(Math.random() * events.length);
       let card = events[draw];
+      console.log(card, draw);
       popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
             <p>Event: ${card.name}</p>
             <p>${card.desc}</p>
@@ -381,10 +391,10 @@ function rolls() {
   const dice2 = Math.floor(Math.random() * 6) + 1;
   let currentPlayer = players[turn];
   if (players.length > 1) {
-    const dice = dice1 + dice2;
-    // const dice = 18; //for test
-    dice1Element.style.backgroundImage = `url("/monopoly/src/images/dice/dice-six-faces-${diceFaces[dice1]}.png")`;
-    dice2Element.style.backgroundImage = `url("/monopoly/src/images/dice/dice-six-faces-${diceFaces[dice2]}.png")`;
+    // const dice = dice1 + dice2;
+    const dice = 18; //for test
+    dice1Element.style.backgroundImage = `url("./src/images/dice/dice-six-faces-${diceFaces[dice1]}.png")`;
+    dice2Element.style.backgroundImage = `url("./src/images/dice/dice-six-faces-${diceFaces[dice2]}.png")`;
 
     if (currentPlayer.skipTurn > 0) {
       currentPlayer.skip(-1);
