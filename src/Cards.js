@@ -44,11 +44,13 @@ events.push(
 );
 
 events.push(
-  new Card("Dragon Valley", "Move to Teleport", "", function (player) {
-    player.moveTo(18);
-    setTimeout(
-      () => checkTile(currentPlayer, tiles[currentPlayer.position]),
-      1000
-    );
-  })
+  new Card(
+    "Kind Red Dragon",
+    "Red Dragon fly you to portal gate.",
+    "",
+    function (player) {
+      player.moveTo(18);
+      setTimeout(() => checkTile(player, tiles[player.position]), 1000);
+    }
+  )
 );

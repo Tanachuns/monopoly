@@ -57,7 +57,7 @@ const dice2Element = document.querySelector("#dice-2");
 
 let turn = 0;
 const diceFaces = ["zero", "one", "two", "three", "four", "five", "six"];
-const tileLevel = ["Land", "House", "City", "Barrack"];
+const tileLevel = ["Land", "House", "Village", "Barrack"];
 
 function checkTile(currentPlayer, tile) {
   try {
@@ -114,9 +114,34 @@ function checkTile(currentPlayer, tile) {
         const upgradeBtn = document.querySelector("#upgrade-btn");
         upgradeBtn.onclick = () => {
           if (currentPlayer.setMoney(-tile.upgrade)) {
-            tile.lv += 1;
-
-            popup.parentElement.style.display = "none";
+            if (tile.lv < 3) {
+              tile.lv += 1;
+              console.log(tile.name, " upgraded.");
+              popup.parentElement.style.display = "flex";
+              popup.innerHTML = `<h1>[${tile.id}] ${tile.name}(${
+                tileLevel[tile.lv]
+              }) </h1>
+              <p>type: ${tile.type}</p>
+              <p>${tile.name} upgraded.</p>
+              <button id='cancel-btn'>close</button>`;
+              const cancelBtn = document.querySelector("#cancel-btn");
+              cancelBtn.onclick = () => {
+                popup.parentElement.style.display = "none";
+              };
+            } else {
+              console.log("This tile on Maximum Level.");
+              popup.parentElement.style.display = "flex";
+              popup.innerHTML = `<h1>[${tile.id}] ${tile.name}(${
+                tileLevel[tile.lv]
+              }) </h1>
+              <p>type: ${tile.type}</p>
+              <p>This tile on Maximum Level.</p>
+              <button id='cancel-btn'>close</button>`;
+              const cancelBtn = document.querySelector("#cancel-btn");
+              cancelBtn.onclick = () => {
+                popup.parentElement.style.display = "none";
+              };
+            }
             allUpdate();
           } else {
             currentPlayer.removePlayer("bankrupt");
@@ -266,7 +291,7 @@ function checkTile(currentPlayer, tile) {
       popup.parentElement.style.display = "flex";
       let draw = Math.floor(Math.random() * treasures.length);
       let card = treasures[draw];
-      console.log(card, draw);
+      console.log(currentPlayer.name, " drew ", card.name);
 
       popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
             <p>Treasure: ${card.name}</p>
@@ -285,7 +310,7 @@ function checkTile(currentPlayer, tile) {
       popup.parentElement.style.display = "flex";
       let draw = Math.floor(Math.random() * events.length);
       let card = events[draw];
-      console.log(card, draw);
+      console.log(currentPlayer.name, " drew ", card.name);
       popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
             <p>Event: ${card.name}</p>
             <p>${card.desc}</p>
@@ -423,14 +448,13 @@ function rolls() {
   const dice2 = Math.floor(Math.random() * 6) + 1;
   let currentPlayer = players[turn];
   if (players.length > 1) {
-    // const dice = dice1 + dice2;
-    const dice = 18; //for test
+    const dice = dice1 + dice2;
+    // const dice = 18; //for test
     dice1Element.style.backgroundImage = `url("./src/images/dice/dice-six-faces-${diceFaces[dice1]}.png")`;
     dice2Element.style.backgroundImage = `url("./src/images/dice/dice-six-faces-${diceFaces[dice2]}.png")`;
 
     if (currentPlayer.skipTurn > 0) {
       currentPlayer.skip(-1);
-
       console.log(
         currentPlayer.name,
         " has to wait for" + currentPlayer.skipTurn + " turns."
