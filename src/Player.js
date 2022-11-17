@@ -107,9 +107,10 @@ class Player {
 
   tranferAsset(asset, player) {
     console.log(asset);
+    console.log(this.name);
     this.assets.splice(this.assets.indexOf(asset), 1);
     player.addAsset(asset);
-    tiles[asset].owner = this.id;
+    tiles[asset].owner = player.id;
   }
 
   removePlayer(reason) {

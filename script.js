@@ -51,7 +51,7 @@ tiles.forEach((tile) => {
 //create test token
 let players = [];
 function createPlayer() {
-  const color = "#" + Math.floor(Math.random() * 4096).toString(16);
+  const color = "#" + Math.floor(Math.random() * 16777215).toString(16);
   players.push(
     new Player(players.length, "Player " + (players.length + 1), color)
   );
@@ -228,7 +228,6 @@ function checkTile(currentPlayer, tile) {
                   "G to ",
                   players[i].name
                 );
-                break;
               }
             }
             popup.parentElement.style.display = "none";
