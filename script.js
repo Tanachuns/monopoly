@@ -37,7 +37,7 @@ tiles.forEach((tile) => {
 let players = [];
 players.push(new Player(0, "Player 1", "red"));
 players.push(new Player(1, "Player 2", "blue"));
-// players.push(new Player(2, "Player 3", "green"));
+players.push(new Player(2, "Player 3", "green"));
 // players.push(new Player(3, "Player 4", "pink"));
 // players.push(new Player(4, "Player 5", "violet"));
 
