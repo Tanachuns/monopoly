@@ -47,7 +47,7 @@ events.push(
   new Card(
     "Kind Red Dragon",
     "Red Dragon fly you to portal gate.",
-    "https://w0.peakpx.com/wallpaper/462/485/HD-wallpaper-red-dragon-fantasy.jpg",
+    "https://i.seadn.io/gae/VnoO_Bm9NJg9E1Sa5pGOtl4HRqAuNhBt_Q8z0HL_-fhjNHnSx1_dfqfrwZ8C_dysu-D79Sr3sQXAmV6lACdh9zh4nsWVkUy1V28q?auto=format&w=3840",
     function (player) {
       player.moveTo(18);
       setTimeout(() => checkTile(player, tiles[player.position]), 1000);
