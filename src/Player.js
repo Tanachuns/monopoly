@@ -60,11 +60,11 @@ class Player {
                 ${assetsHtml}    
             </ul>
         </div>`;
-    console.log("Board updated.");
+    // console.log("Board updated.");
   }
   moveByDice(dice) {
     if (this.position + dice > 35) {
-      console.log(this.name + " passed start get 200G");
+      // console.log(this.name + " passed start get 200G");
       this.setMoney(200);
 
       // if (this.position + dice > 4) {
@@ -75,16 +75,16 @@ class Player {
       tiles[this.position + dice].element.appendChild(this.tokenElement);
       this.position += dice;
     }
-    console.log(this.name, "rolls ", dice, "then move to", this.position);
+    // console.log(this.name, "rolls ", dice, "then move to", this.position);
   }
   moveTo(tileId) {
     if (tileId <= 18) {
-      console.log(this.name + " passed start get 200G");
+      // console.log(this.name + " passed start get 200G");
       this.setMoney(200);
     }
     tiles[tileId].element.appendChild(this.tokenElement);
     this.position = parseInt(tileId);
-    console.log(this.name, " moved to ", this.position);
+    // console.log(this.name, " moved to ", this.position);
   }
   skip(turns) {
     this.skipTurn += turns;
@@ -94,7 +94,7 @@ class Player {
       return false;
     } else {
       this.money += amount;
-      console.log(this.name + " " + amount);
+      // console.log(this.name + " " + amount);
       return true;
     }
   }
@@ -106,8 +106,8 @@ class Player {
   }
 
   tranferAsset(asset, player) {
-    console.log(asset);
-    console.log(this.name);
+    // console.log(asset);
+    // console.log(this.name);
     this.assets.splice(this.assets.indexOf(asset), 1);
     player.addAsset(asset);
     tiles[asset].owner = player.id;
@@ -133,6 +133,6 @@ class Player {
         tile.setColor("lightgray");
       }
     });
-    console.log(this.name, " is out!");
+    // console.log(this.name, " is out!");
   }
 }

@@ -94,9 +94,9 @@ const tileLevel = ["Land", "House", "Village", "Barrack"];
 function checkTile(currentPlayer, tile) {
   try {
     if (tile.type === "normal") {
-      console.log(`tile:[${tile.id}]${tile.name}`);
+      // console.log(`tile:[${tile.id}]${tile.name}`);
       if (tile.owner === "") {
-        console.log(`has no owner`);
+        // console.log(`has no owner`);
         popup.parentElement.style.display = "flex";
         popup.innerHTML = `<h1>[${tile.id}] ${tile.name}(${
           tileLevel[tile.lv]
@@ -115,13 +115,13 @@ function checkTile(currentPlayer, tile) {
           if (currentPlayer.setMoney(-tile.price)) {
             currentPlayer.addAsset(tile.id);
 
-            console.log(
-              currentPlayer.name + "buy",
-              tile.id,
-              tile.name,
-              "he has ",
-              currentPlayer.assets
-            );
+            // console.log(
+            //   currentPlayer.name + "buy",
+            //   tile.id,
+            //   tile.name,
+            //   "he has ",
+            //   currentPlayer.assets
+            // );
             popup.parentElement.style.display = "none";
             allUpdate();
           } else {
@@ -129,7 +129,7 @@ function checkTile(currentPlayer, tile) {
           }
         };
       } else if (tile.owner === currentPlayer.id) {
-        console.log("time to upgrade");
+        // console.log("time to upgrade");
         popup.parentElement.style.display = "flex";
         popup.innerHTML = `<h1>[${tile.id}] ${tile.name}(${
           tileLevel[tile.lv]
@@ -148,7 +148,7 @@ function checkTile(currentPlayer, tile) {
           if (currentPlayer.setMoney(-tile.upgrade)) {
             if (tile.lv < 3) {
               tile.lv += 1;
-              console.log(tile.name, " upgraded.");
+              // console.log(tile.name, " upgraded.");
               popup.parentElement.style.display = "flex";
               popup.innerHTML = `<h1>[${tile.id}] ${tile.name}(${
                 tileLevel[tile.lv]
@@ -161,7 +161,7 @@ function checkTile(currentPlayer, tile) {
                 popup.parentElement.style.display = "none";
               };
             } else {
-              console.log("This tile on Maximum Level.");
+              // console.log("This tile on Maximum Level.");
               popup.parentElement.style.display = "flex";
               popup.innerHTML = `<h1>[${tile.id}] ${tile.name}(${
                 tileLevel[tile.lv]
@@ -180,7 +180,7 @@ function checkTile(currentPlayer, tile) {
           }
         };
       } else {
-        console.log("time to pay rent");
+        // console.log("time to pay rent");
         popup.parentElement.style.display = "flex";
         popup.innerHTML = `<h1>[${tile.id}] ${tile.name}(${
           tileLevel[tile.lv]
@@ -199,13 +199,13 @@ function checkTile(currentPlayer, tile) {
             players.forEach((player) => {
               if (player.id == tile.owner) {
                 player.setMoney(tile.rent[tile.lv]);
-                console.log(
-                  currentPlayer.name,
-                  " pay ",
-                  tile.rent[tile.lv],
-                  "G to ",
-                  player.name
-                );
+                // console.log(
+                //   currentPlayer.name,
+                //   " pay ",
+                //   tile.rent[tile.lv],
+                //   "G to ",
+                //   player.name
+                // );
               }
             });
             popup.parentElement.style.display = "none";
@@ -221,13 +221,13 @@ function checkTile(currentPlayer, tile) {
               if (players[i].id == tile.owner) {
                 players[i].setMoney(tile.rent[tile.lv] + tile.reSale);
                 players[i].tranferAsset(tile.id, currentPlayer);
-                console.log(
-                  currentPlayer.name,
-                  " pay ",
-                  tile.rent[tile.lv] + tile.reSale,
-                  "G to ",
-                  players[i].name
-                );
+                // console.log(
+                //   currentPlayer.name,
+                //   " pay ",
+                //   tile.rent[tile.lv] + tile.reSale,
+                //   "G to ",
+                //   players[i].name
+                // );
               }
             }
             popup.parentElement.style.display = "none";
@@ -238,9 +238,9 @@ function checkTile(currentPlayer, tile) {
         };
       }
     } else if (tile.type === "spacial") {
-      console.log(`tile:[${tile.id}]${tile.name}`);
+      // console.log(`tile:[${tile.id}]${tile.name}`);
       if (tile.owner === "") {
-        console.log(`has no owner`);
+        // console.log(`has no owner`);
         popup.parentElement.style.display = "flex";
         popup.innerHTML = `<h1>[${tile.id}] ${tile.name}(${
           tileLevel[tile.lv]
@@ -260,13 +260,13 @@ function checkTile(currentPlayer, tile) {
             currentPlayer.assets.push(tile.id);
             tile.owner = players.indexOf(currentPlayer);
             tiles[tile.id].element.style.background = currentPlayer.color;
-            console.log(
-              currentPlayer.name + "buy",
-              tile.id,
-              tile.name,
-              "he has ",
-              currentPlayer.assets
-            );
+            // console.log(
+            //   currentPlayer.name + "buy",
+            //   tile.id,
+            //   tile.name,
+            //   "he has ",
+            //   currentPlayer.assets
+            // );
             popup.parentElement.style.display = "none";
             allUpdate();
           } else {
@@ -274,7 +274,7 @@ function checkTile(currentPlayer, tile) {
           }
         };
       } else if (tile.owner === currentPlayer.id) {
-        console.log("time to upgrade");
+        // console.log("time to upgrade");
         popup.parentElement.style.display = "flex";
         popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
               <p>type: ${tile.type}</p>
@@ -286,7 +286,7 @@ function checkTile(currentPlayer, tile) {
           popup.parentElement.style.display = "none";
         };
       } else {
-        console.log("time to pay rent");
+        // console.log("time to pay rent");
         popup.parentElement.style.display = "flex";
         popup.innerHTML = `<h1>[${tile.id}] ${tile.name}(${
           tileLevel[tile.lv]
@@ -301,13 +301,13 @@ function checkTile(currentPlayer, tile) {
             players.forEach((player) => {
               if (player.id == tile.owner) {
                 player.setMoney(tile.rent[tile.lv]);
-                console.log(
-                  currentPlayer.name,
-                  " pay ",
-                  tile.rent[tile.lv],
-                  "G to ",
-                  players[tile.owner].name
-                );
+                // console.log(
+                //   currentPlayer.name,
+                //   " pay ",
+                //   tile.rent[tile.lv],
+                //   "G to ",
+                //   players[tile.owner].name
+                // );
               }
             });
             popup.parentElement.style.display = "none";
@@ -318,11 +318,11 @@ function checkTile(currentPlayer, tile) {
         };
       }
     } else if (tile.type === "treasure") {
-      console.log(currentPlayer.name + ` found a treasure!`);
+      // console.log(currentPlayer.name + ` found a treasure!`);
       popup.parentElement.style.display = "flex";
       let draw = Math.floor(Math.random() * treasures.length);
       let card = treasures[draw];
-      console.log(currentPlayer.name, " drew ", card.name);
+      // console.log(currentPlayer.name, " drew ", card.name);
 
       popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
             <p>Treasure: ${card.name}</p>
@@ -337,11 +337,11 @@ function checkTile(currentPlayer, tile) {
         popup.parentElement.style.display = "none";
       };
     } else if (tile.type === "event") {
-      console.log(currentPlayer.name + ` found a event!`);
+      // console.log(currentPlayer.name + ` found a event!`);
       popup.parentElement.style.display = "flex";
       let draw = Math.floor(Math.random() * events.length);
       let card = events[draw];
-      console.log(currentPlayer.name, " drew ", card.name);
+      // console.log(currentPlayer.name, " drew ", card.name);
       popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
             <p>Event: ${card.name}</p>
             <p>${card.desc}</p>
@@ -355,7 +355,7 @@ function checkTile(currentPlayer, tile) {
         popup.parentElement.style.display = "none";
       };
     } else if (tile.type === "stop") {
-      console.log(currentPlayer.name + ` found Orc Village.`);
+      // console.log(currentPlayer.name + ` found Orc Village.`);
       popup.parentElement.style.display = "flex";
       popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
             <p>type: ${tile.type}</p>
@@ -369,7 +369,7 @@ function checkTile(currentPlayer, tile) {
         popup.parentElement.style.display = "none";
       };
     } else if (tile.type === "teleport") {
-      console.log(currentPlayer.name + ` found Ancient Portal Gate.`);
+      // console.log(currentPlayer.name + ` found Ancient Portal Gate.`);
       popup.parentElement.style.display = "flex";
       popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
             <p>type: ${tile.type}</p>
@@ -410,7 +410,7 @@ function checkTile(currentPlayer, tile) {
         }
       };
     } else if (tile.type === "tostop") {
-      console.log(currentPlayer.name + ` found Orc Army`);
+      // console.log(currentPlayer.name + ` found Orc Army`);
       popup.parentElement.style.display = "flex";
       popup.innerHTML = `<h1>[${tile.id}] ${tile.name}</h1>
             <p>type: ${tile.type}</p>
@@ -427,7 +427,7 @@ function checkTile(currentPlayer, tile) {
         );
       };
     } else if (tile.type === "tax") {
-      console.log("time to pay bill");
+      // console.log("time to pay bill");
       popup.parentElement.style.display = "flex";
       popup.innerHTML = `<h1>[${tile.id}] ${tile.name} </h1>
               <p>type: ${tile.type}</p>
@@ -445,8 +445,8 @@ function checkTile(currentPlayer, tile) {
       };
     }
   } catch (error) {
-    console.log("no tile in Tiles.js");
-    console.log("you are on test make sure this log wont show when finish");
+    // console.log("no tile in Tiles.js");
+    // console.log("you are on test make sure this log wont show when finish");
     console.error(error);
   }
 }
@@ -510,16 +510,16 @@ function rolls() {
       cancelBtn.onclick = () => {
         popup.parentElement.style.display = "none";
       };
-      console.log(
-        currentPlayer.name,
-        " has to wait for" + currentPlayer.skipTurn + " turns."
-      );
+      // console.log(
+      //   currentPlayer.name,
+      //   // " has to wait for" + currentPlayer.skipTurn + " turns."
+      // );
       buttonRoll.style.display = "none";
       setTimeout(() => {
         buttonEnd.style.display = "block";
       }, 1200);
     } else {
-      console.log(currentPlayer.name + " in game");
+      // console.log(currentPlayer.name + " in game");
       currentPlayer.moveByDice(dice);
       buttonRoll.style.display = "none";
       setTimeout(() => {
@@ -541,9 +541,9 @@ function endTurn() {
     buttonRoll.style.display = "block";
   }, 200);
   turn < players.length - 1 ? (turn += 1) : (turn = 0);
-  console.log("Turn ended.");
-  console.log("========================================");
-  console.log(players[turn].name + "'s Turn.");
+  // console.log("Turn ended.");
+  // console.log("========================================");
+  // console.log(players[turn].name + "'s Turn.");
   playerTurn.innerHTML = players[turn].name + "'s Turn.";
 }
 
