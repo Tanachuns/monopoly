@@ -48,7 +48,7 @@ class Player {
       }
     });
     spacial === 4
-      ? endGame(this.name + " has summoned Demon Lord and Killed all of you.")
+      ? endGame(this.name + " has summoned Demon Lord and kill all of you.")
       : (spacial = 0);
     this.detailsElement.innerHTML = `
         <h2>${this.name}</h2>
