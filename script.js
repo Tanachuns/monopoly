@@ -84,6 +84,7 @@ function startGame() {
     startForPresentation.style.display = "none";
     start.style.display = "none";
     dicePile.style.display = "flex";
+    allUpdate();
   }
 }
 
@@ -483,6 +484,7 @@ startForPresentation.onclick = () => {
   players[0].addAsset(20);
   players[0].addAsset(28);
   isPresentaion = true;
+  allUpdate();
 };
 
 function rolls() {
