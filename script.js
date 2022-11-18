@@ -221,6 +221,7 @@ function checkTile(currentPlayer, tile) {
               if (players[i].id == tile.owner) {
                 players[i].setMoney(tile.rent[tile.lv] + tile.reSale);
                 players[i].tranferAsset(tile.id, currentPlayer);
+                break;
                 // console.log(
                 //   currentPlayer.name,
                 //   " pay ",
