@@ -478,6 +478,9 @@ start.onclick = () => {
 };
 startForPresentation.onclick = () => {
   startGame();
+  players[0].addAsset(16);
+  players[0].addAsset(20);
+  players[0].addAsset(28);
   isPresentaion = true;
 };
 

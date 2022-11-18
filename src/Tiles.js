@@ -57,13 +57,13 @@ tiles.push(
     [2, 10, 120, 250]
   )
 );
-
-tiles.push(
+//images-na.ssl-images-amazon.com/images/S/pv-target-images/88739554024648d6fd0a27d7aa783631df3b35cce3c0b0e636320f6258a33a5f._RI_.jpg
+https: tiles.push(
   new Tile(
     3,
     "The Temple of the South.",
     "spacial",
-    "https://static.wikia.nocookie.net/starwars/images/f/fc/Dark_Temple_infobox.png/revision/latest?cb=20150822184915",
+    "https://i.pinimg.com/originals/eb/41/b1/eb41b1641795cf49dc89c0b3e876fb1d.jpg",
     100,
     [100]
   )
@@ -190,7 +190,7 @@ tiles.push(
     16,
     "The Temple of the West.",
     "spacial",
-    "https://static.wikia.nocookie.net/starwars/images/f/fc/Dark_Temple_infobox.png/revision/latest?cb=20150822184915",
+    "https://i.pinimg.com/originals/eb/41/b1/eb41b1641795cf49dc89c0b3e876fb1d.jpg",
     100,
     [100]
   )
@@ -230,7 +230,7 @@ tiles.push(
     20,
     "The Temple of the North.",
     "spacial",
-    "https://static.wikia.nocookie.net/starwars/images/f/fc/Dark_Temple_infobox.png/revision/latest?cb=20150822184915",
+    "https://i.pinimg.com/originals/eb/41/b1/eb41b1641795cf49dc89c0b3e876fb1d.jpg",
     100,
     [100]
   )
@@ -308,7 +308,7 @@ tiles.push(
     28,
     "The Temple of the East.",
     "spacial",
-    "https://static.wikia.nocookie.net/starwars/images/f/fc/Dark_Temple_infobox.png/revision/latest?cb=20150822184915",
+    "https://i.pinimg.com/originals/eb/41/b1/eb41b1641795cf49dc89c0b3e876fb1d.jpg",
     100,
     [100]
   )
