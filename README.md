@@ -1,6 +1,5 @@
 # monopoly
 
-> Project Todo List : [click here](https://shorturl.at/iAN24) |
 
 A Fantasy Monopoly game on website.
 
